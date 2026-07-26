@@ -17,6 +17,7 @@ go-to: sandbox_menu
 - @editfactions: Edit Republican Factions
 - @editparamilitary: Edit Paramilitary Groups
 - @editarmy: Edit Army and Police
+- @editreconstructionsupport: Edit Reconstruction Support
 - @backSpecialScene: Exit Sandbox Menu
 
 @clear_hand
@@ -794,3 +795,25 @@ Q.South_army_strength -= 25;
 !}
 
 Lowered South Army Strength By 25,000
+
+@editreconstructionsupport
+
+- @raisereconstruction_support: Raise support for Reconstruction
+- @lowerreconstruction_support: Lower support for Reconstruction
+- @returnsandbox: Return To Sandbox Menu
+
+@raisereconstruction_support
+go-to: editreconstructionsupport
+on-arrival: {!
+Q.reconstruction_support += 25;
+!}
+
+Raised support for Reconstruction
+
+@lowerreconstruction_support
+go-to: editreconstructionsupport
+on-arrival: {!
+Q.reconstruction_support -= 25;
+!}
+
+Lowered support for Reconstruction
