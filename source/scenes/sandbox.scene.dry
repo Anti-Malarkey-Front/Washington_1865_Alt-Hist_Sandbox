@@ -14,7 +14,6 @@ go-to: sandbox_menu
 - @editbudget: Edit Budget
 - @editeconomy: Edit Economy
 - @editrelations: Edit Party Relations
-- @editpartysupport: Edit Party Support
 - @editfactions: Edit Republican Factions
 - @editparamilitary: Edit Paramilitary Groups
 - @editarmy: Edit Army and Police
