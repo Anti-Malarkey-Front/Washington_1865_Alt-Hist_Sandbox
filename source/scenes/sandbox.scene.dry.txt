@@ -1,0 +1,797 @@
+title: sandbox
+new-page: true
+is-special: true
+is-hand: true
+go-to: sandbox_menu
+
+= Sandbox Menu
+
+@sandbox_menu
+
+- @clear_hand: Clear Cards
+- @make_adv_available: Make Advisors Available
+- @editresources: Edit Resources
+- @editbudget: Edit Budget
+- @editeconomy: Edit Economy
+- @editrelations: Edit Party Relations
+- @editpartysupport: Edit Party Support
+- @editfactions: Edit Republican Factions
+- @editparamilitary: Edit Paramilitary Groups
+- @editarmy: Edit Army and Police
+- @backSpecialScene: Exit Sandbox Menu
+
+@clear_hand
+go-to: sandbox_menu
+on-arrival: {!
+Q.advisor_action_timer = 6;
+if (Q.difficulty >= 0) {
+    window.dendryUI.dendryEngine.state.currentHands['main'] = [];
+} else {
+    window.dendryUI.dendryEngine.state.currentHands['main.main_easy'] = [];
+}
+!}
+
+Cleared all cards.
+
+@make_adv_available
+go-to: sandbox_menu
+on-arrival: {!
+Q.advisor_action_timer = 0;
+!}
+
+Made advisor actions available.
+
+@editfactions
+
+- @editradical: Edit Radical Faction of the Republicans
+- @editmoderate: Edit Moderate Faction of the Republicans
+- @editconservative: Edit Conservative Faction of the Republicans
+- @editliberal: Edit Liberal Faction of the Republicans
+- @returnsandbox: Return To Sandbox
+
+@editresources
+
+- @add10resources: Add 10 Resources
+- @add20resources: Add 20 Resources
+- @add100resources: Add 100 Resources
+- @subtract10resources: Subtract 10 Resources
+- @subtract20resources: Subtract 20 Resources
+- @subtract100resources: Subtract 100 Resources
+- @returnsandbox: Return To Sandbox
+
+@add10resources
+go-to: sandbox_menu
+on-arrival: {!
+Q.resources += 10;
+!}
+
+Added 10 resources to the party's stockpile.
+
+@add20resources
+go-to: sandbox_menu
+on-arrival: {!
+Q.resources += 20;
+!}
+
+Added 20 resources to the party's stockpile.
+
+@add100resources
+go-to: sandbox_menu
+on-arrival: {!
+Q.resources += 100;
+!}
+
+Added 100 resources to the party's stockpile, stop being greedy.
+
+@subtract10resources
+go-to: sandbox_menu
+on-arrival: {!
+Q.resources -= 10;
+!}
+
+Removed 10 resources from the party's stockpile.
+
+@subtract20resources
+go-to: sandbox_menu
+on-arrival: {!
+Q.resources -= 20;
+!}
+
+Removed 20 resources from the party's stockpile.
+
+@subtract100resources
+go-to: sandbox_menu
+on-arrival: {!
+Q.resources -= 100;
+!}
+
+Removed 100 resources from the party's stockpile. This doesn't go to the homeless or anything, why would you do this?
+
+@editbudget
+
+- @add10budget: Add 10 Budget
+- @add20budget: Add 20 Budget
+- @add100budget: Add 100 Budget
+- @subtract10budget: Subtract 10 Budget
+- @subtract20budget: Subtract 20 Budget
+- @subtract100budget: Subtract 100 Budget
+- @returnsandbox: Return To Sandbox
+
+@add10budget
+go-to: sandbox_menu
+on-arrival: {!
+Q.budget += 10;
+!}
+
+Added 10 budget to the country's stockpile.
+
+@add20budget
+go-to: sandbox_menu
+on-arrival: {!
+Q.budget += 20;
+!}
+
+Added 20 budget to the country's stockpile.
+
+@add100budget
+go-to: sandbox_menu
+on-arrival: {!
+Q.budget += 100;
+!}
+
+Added 100 budget to the country's stockpile, stop being greedy.
+
+@subtract10budget
+go-to: sandbox_menu
+on-arrival: {!
+Q.budget -= 10;
+!}
+
+Removed 10 budget from the country's stockpile.
+
+@subtract20budget
+go-to: sandbox_menu
+on-arrival: {!
+Q.budget -= 20;
+!}
+
+Removed 20 budget from the country's stockpile.
+
+@subtract100budget
+go-to: sandbox_menu
+on-arrival: {!
+Q.budget -= 100;
+!}
+
+Removed 100 budget from the country's stockpile. This doesn't go to the homeless or anything, why would you do this?
+
+@editeconomy
+
+- @increasegrowth: Increase Economic Growth by 5%
+- @decreasegrowth: Decrease Economic Growth by 5%
+- @increaseinflation: Increase Inflation by 5%
+- @decreaseinflation: Decrease Inflation by 5%
+- @increasetariffs: Increase Tariffs by a point
+- @decreasetariffs: Decrease Tariffs by a point
+- @returnsandbox: Return To Sandbox Menu
+
+@increasegrowth
+go-to: editeconomy
+on-arrival: {!
+Q.economic_growth += 5;
+!}
+
+Increased economic growth by 5%.
+
+@decreasegrowth
+go-to: editeconomy
+on-arrival: {!
+Q.economic_growth -= 5;
+!}
+
+Decreased economic growth by 5%.
+
+@increaseinflation
+go-to: editeconomy
+on-arrival: {!
+Q.inflation += 5;
+!}
+
+Increased inflation by 5%.
+
+@decreaseinflation
+go-to: editeconomy
+on-arrival: {!
+Q.inflation -= 5;
+!}
+
+Decreased inflation by 5%.
+
+@increasetariffs
+go-to: editeconomy
+on-arrival: {!
+Q.tariffs += 1;
+!}
+
+Increased tariffs by a point.
+
+@decreasetariffs
+go-to: editeconomy
+on-arrival: {!
+Q.tariffs -= 1;
+!}
+
+Decreased tariffs by a point.
+
+@editrelations
+
+- @increasedemocratrel: Increase Relations With The Democrats
+- @decreasedemocratsrel: Decrease Relations With The Democrats
+- @increaseliberalrel: Increase Relations With The Liberal Republican Party
+- @decreaseliberalrel: Decrease Relations With The Liberal Republican Party
+- @returnsandbox: Return To Sandbox Menu
+
+@increasedemocratrel
+go-to: editrelations
+on-arrival: {!
+Q.dem_relation += 15;
+!}
+
+Increased relations with the Democrats.
+
+@decreasedemocratrel
+go-to: editrelations
+on-arrival: {!
+Q.dem_relation -= 15;
+!}
+
+Decreased relations with the Democrats.
+
+@increaseliberalrel
+go-to: editrelations
+on-arrival: {!
+Q.liberal_relation += 15;
+!}
+
+Increased relations with the Liberal Republican Party.
+
+@decreaseliberalrel
+go-to: editrelations
+on-arrival: {!
+Q.liberal_relation -= 15;
+!}
+
+Decreased relations with the Liberal Republican Party.
+
+@editradical
+
+- @add5radicaldissent: Add 5 Radical Dissent
+- @100radicaldissent: Maximum Radical Dissent
+- @subtract5radicaldissent: Remove 5 Radical Dissent
+- @removeradicaldissent: Remove All Radical Dissent
+- @add5radicalstrength: Add 5 Radical Strength
+- @100radicalstrength: Maximum Radical Strength
+- @subtract5radicalstrength: Remove 5 Radical Strength
+- @removeradicalstrength: Remove Radical Strength
+- @returnsandbox: Return To Sandbox Menu
+
+@add5radicaldissent
+go-to: editradical
+on-arrival: {!
+Q.radical_dissent += 5;
+!}
+
+Added 5 radical dissent.
+
+@100radicaldissent
+go-to: editradical
+on-arrival: {!
+Q.radical_dissent = 100;
+!}
+
+Maximised radical dissent.
+
+@subtract5radicaldissent
+go-to: editradical
+on-arrival: {!
+Q.radical_dissent -= 5;
+!}
+
+Reduced radical dissent by 5.
+
+@removeradicaldissent
+go-to: editradical
+on-arrival: {!
+Q.radical_dissent = 0;
+!}
+
+Removed all radical dissent.
+
+@add5radicalstrength
+go-to: editradical
+on-arrival: {!
+Q.radical_strength += 5;
+!}
+
+Added 5 radical strength.
+
+@100radicalstrength
+go-to: editradical
+on-arrival: {!
+Q.radical_strength = 100;
+!}
+
+Maximised radical strength.
+
+@subtract5radicalstrength
+go-to: editradical
+on-arrival: {!
+Q.radical_strength -= 5;
+!}
+
+Reduced radical strength by 5.
+
+@removeradicalstrength
+go-to: editradical
+on-arrival: {!
+Q.radical_strength = 0;
+!}
+
+Removed all radical strength.
+
+@editmoderate
+
+- @add5moderatedissent: Add 5 Moderate Dissent
+- @100moderatedissent: Maximum Moderate Dissent
+- @subtract5moderatedissent: Remove 5 Moderate Dissent
+- @removemoderatedissent: Remove All Moderate Dissent
+- @add5moderatestrength: Add 5 Moderate Strength
+- @100moderatestrength: Maximum Moderate Strength
+- @subtract5moderatestrength: Remove 5 Moderate Strength
+- @removemoderatestrength: Remove Moderate Strength
+- @returnsandbox: Return To Sandbox Menu
+
+@add5moderatedissent
+go-to: editmoderate
+on-arrival: {!
+Q.moderate_dissent += 5;
+!}
+
+Added 5 moderate dissent.
+
+@100moderatedissent
+go-to: editmoderate
+on-arrival: {!
+Q.moderate_dissent = 100;
+!}
+
+Maximised moderate dissent.
+
+@subtract5moderatedissent
+go-to: editmoderate
+on-arrival: {!
+Q.moderate_dissent -= 5;
+!}
+
+Reduced moderate dissent by 5.
+
+@removemoderatedissent
+go-to: editmoderate
+on-arrival: {!
+Q.moderate_dissent = 0;
+!}
+
+Removed all moderate dissent.
+
+@add5moderatestrength
+go-to: editmoderate
+on-arrival: {!
+Q.moderate_strength += 5;
+!}
+
+Added 5 moderate strength.
+
+@100moderatestrength
+go-to: editmoderate
+on-arrival: {!
+Q.moderate_strength = 100;
+!}
+
+Maximised moderate strength.
+
+@subtract5moderatestrength
+go-to: editmoderate
+on-arrival: {!
+Q.moderate_strength -= 5;
+!}
+
+Reduced moderate strength by 5.
+
+@removemoderatestrength
+go-to: editmoderate
+on-arrival: {!
+Q.moderate_strength = 0;
+!}
+
+Removed all moderate strength.
+
+@editconservative
+
+- @add5conservativedissent: Add 5 Conservative Dissent
+- @100conservativedissent: Maximum Conservative Dissent
+- @subtract5conservativedissent: Remove 5 Conservative Dissent
+- @removeconservativedissent: Remove All Conservative Dissent
+- @add5conservativestrength: Add 5 Conservative Strength
+- @100conservativestrength: Maximum Conservative Strength
+- @subtract5conservativestrength: Remove 5 Conservative Strength
+- @removeconservativestrength: Remove Conservative Strength
+- @returnsandbox: Return To Sandbox Menu
+
+@add5conservativedissent
+go-to: editconservative
+on-arrival: {!
+Q.conservative_dissent += 5;
+!}
+
+Added 5 conservative dissent.
+
+@100conservativedissent
+go-to: editconservative
+on-arrival: {!
+Q.conservative_dissent = 100;
+!}
+
+Maximised conservative dissent.
+
+@subtract5conservativedissent
+go-to: editconservative
+on-arrival: {!
+Q.conservative_dissent -= 5;
+!}
+
+Reduced conservative dissent by 5.
+
+@removeconservativedissent
+go-to: editconservative
+on-arrival: {!
+Q.conservative_dissent = 0;
+!}
+
+Removed all conservative dissent.
+
+@add5conservativestrength
+go-to: editconservative
+on-arrival: {!
+Q.conservative_strength += 5;
+!}
+
+Added 5 conservative strength.
+
+@100conservativestrength
+go-to: editconservative
+on-arrival: {!
+Q.conservative_strength = 100;
+!}
+
+Maximised conservative strength.
+
+@subtract5conservativestrength
+go-to: editconservative
+on-arrival: {!
+Q.conservative_strength -= 5;
+!}
+
+Reduced conservative strength by 5.
+
+@removeconservativestrength
+go-to: editconservative
+on-arrival: {!
+Q.conservative_strength = 0;
+!}
+
+Removed all conservative strength.
+
+@editliberal
+
+- @add5liberaldissent: Add 5 Liberal Dissent
+- @100liberaldissent: Maximum Liberal Dissent
+- @subtract5liberaldissent: Remove 5 Liberal Dissent
+- @removeliberaldissent: Remove All Liberal Dissent
+- @add5liberalstrength: Add 5 Liberal Strength
+- @100liberalstrength: Maximum Liberal Strength
+- @subtract5liberalstrength: Remove 5 Liberal Strength
+- @removeliberalstrength: Remove Liberal Strength
+- @returnsandbox: Return To Sandbox Menu
+
+@add5liberaldissent
+go-to: editliberal
+on-arrival: {!
+Q.liberal_dissent += 5;
+!}
+
+Added 5 liberal dissent.
+
+@100liberaldissent
+go-to: editliberal
+on-arrival: {!
+Q.liberal_dissent = 100;
+!}
+
+Maximised liberal dissent.
+
+@subtract5liberaldissent
+go-to: editliberal
+on-arrival: {!
+Q.liberal_dissent -= 5;
+!}
+
+Reduced liberal dissent by 5.
+
+@removeliberaldissent
+go-to: editliberal
+on-arrival: {!
+Q.liberal_dissent = 0;
+!}
+
+Removed all liberal dissent.
+
+@add5liberalstrength
+go-to: editliberal
+on-arrival: {!
+Q.liberal_strength += 5;
+!}
+
+Added 5 liberal strength.
+
+@100liberalstrength
+go-to: editliberal
+on-arrival: {!
+Q.liberal_strength = 100;
+!}
+
+Maximised liberal strength.
+
+@subtract5liberalstrength
+go-to: editliberal
+on-arrival: {!
+Q.liberal_strength -= 5;
+!}
+
+Reduced liberal strength by 5.
+
+@removeliberalstrength
+go-to: editliberal
+on-arrival: {!
+Q.liberal_strength = 0;
+!}
+
+Removed all liberal strength.
+
+@returnsandbox
+go-to: sandbox_menu
+
+@editparamilitary
+
+- @raiseUnion_Leaguestrength: Raise Union League Strength
+- @lowerUnion_Leaguestrength: Lower Union League Strength
+- @raiseUnion_Leaguemilitancy: Raise Union League Militancy
+- @lowerUnion_Leaguemilitancy: Lower Union League Militancy
+- @raisekkkstrength: Raise KKK Strength
+- @lowerkkkstrength: Lower KKK Strength
+- @raisekkkmilitancy: Raise KKK Militancy
+- @lowerkkkmilitancy: Lower KKK Militancy
+- @bankkk: Ban KKK
+- @unbankkk: Unban KKK
+- @returnsandbox: Return To Sandbox Menu
+
+@raiseUnion_Leaguestrength
+go-to: editparamilitary
+on-arrival: {!
+Q.Union_League_strength += 200;
+!}
+
+Raised Union League strength by 200.
+
+@lowerUnion_Leaguestrength
+go-to: editparamilitary
+on-arrival: {!
+Q.Union_League_strength -= 200;
+!}
+
+Lowered Union League strength by 200.
+
+@raiseUnion_Leaguemilitancy
+go-to: editparamilitary
+on-arrival: {!
+Q.Union_League_militancy += 0.15;
+!}
+
+Raised Union League militancy.
+
+@lowerUnion_Leaguemilitancy
+go-to: editparamilitary
+on-arrival: {!
+Q.Union_League_militancy -= 0.15;
+!}
+
+Lowered Union League militancy.
+
+@raisekkkstrength
+go-to: editparamilitary
+on-arrival: {!
+Q.kkk_strength += 200;
+!}
+
+Raised KKK strength by 200.
+
+@lowerkkkstrength
+go-to: editparamilitary
+on-arrival: {!
+Q.kkk_strength -= 200;
+!}
+
+Lowered KKK strength by 200.
+
+@raisekkkmilitancy
+go-to: editparamilitary
+on-arrival: {!
+Q.kkk_militancy += 0.15;
+!}
+
+Raised KKK militancy.
+
+@lowerkkkmilitancy
+go-to: editparamilitary
+on-arrival: {!
+Q.kkk_militancy -= 0.15;
+!}
+
+Lowered KKK militancy.
+
+@bankkk
+go-to: editparamilitary
+view-if: sh_banned == 0
+on-arrival: {!
+Q.kkk_banned = 1;
+!}
+
+Banned the KKK.
+
+@unbankkk
+go-to: editparamilitary
+view-if: sh_banned != 0
+on-arrival: {!
+Q.kkk_banned = 0;
+!}
+
+Unbanned the KKK.
+
+@editarmy
+
+- @raisearmystrength: Raise U.S Army Strength By 25,000
+- @lowerarmystrength: Lower U.S Army Strength
+- @raisearmyloyalty: Raise U.S Army Loyalty
+- @lowerarmyloyalty: Lower U.S Army Loyalty
+- @raiseUs_policestrength: Raise US Police Strength By 25,000
+- @lowerUs_policestrength: Lower US Police Strength
+- @raiseUs_policeloyalty: Raise US Police Loyalty
+- @lowerUs_policeloyalty: Lower US Police Loyalty
+- @raisenavystrength: Raise U.S Navy Strength By 25,000
+- @lowernavystrength: Lower U.S Navy Strength
+- @raisenavyloyalty: Raise U.S Navy Loyalty
+- @lowernavyloyalty: Lower U.S Navy Loyalty
+-@raiseSouth_armystrength: Raise South Army Strength By 25,000
+-@lowerSouth_armystrength: Lower South Army Strength By 25,000
+- @returnsandbox: Return To Sandbox Menu
+
+@raisearmystrength
+go-to: editarmy
+on-arrival: {!
+Q.army_strength += 25;
+!}
+
+Raised U.S Army strength by 25,000.
+
+@lowerarmystrength
+go-to: editarmy
+on-arrival: {!
+Q.army_strength -= 25;
+!}
+
+Lowered U.S Army strength by 25,000.
+
+@raisearmyloyalty
+go-to: editarmy
+on-arrival: {!
+Q.army_loyalty += 0.2;
+!}
+
+Raised U.S Army loyalty.
+
+@lowerarmyloyalty
+go-to: editarmy
+on-arrival: {!
+Q.army_loyalty -= 0.2;
+!}
+
+Lowered U.S Army loyalty.
+
+@raiseUs_policestrength
+go-to: editarmy
+on-arrival: {!
+Q.Us_police_strength += 25;
+!}
+
+Raised US Police strength by 25,000.
+
+@lowerUs_policestrength
+go-to: editarmy
+on-arrival: {!
+Q.Us_police_strength -= 25;
+!}
+
+Lowered US Police strength by 25,000.
+
+@raiseUs_policeloyalty
+go-to: editarmy
+on-arrival: {!
+Q.Us_police_loyalty += 0.2;
+!}
+
+Raised US Police loyalty.
+
+@lowerUs_policeloyalty
+go-to: editarmy
+on-arrival: {!
+Q.Us_police_loyalty -= 0.2;
+!}
+
+Lowered US Police loyalty.
+
+@raisenavystrength
+go-to: editarmy
+on-arrival: {!
+Q.navy_strength += 25;
+!}
+
+Raised U.S Navy strength by 25,000.
+
+@lowernavystrength
+go-to: editarmy
+on-arrival: {!
+Q.navy_strength -= 25;
+!}
+
+Lowered U.S Navy strength by 25,000.
+
+@raisenavyloyalty
+go-to: editarmy
+on-arrival: {!
+Q.navy_loyalty += 0.2;
+!}
+
+Raised U.S Navy loyalty.
+
+@lowernavyloyalty
+go-to: editarmy
+on-arrival: {!
+Q.navy_loyalty -= 0.2;
+!}
+
+Lowered U.S Navy loyalty.
+
+@raiseSouth_armystrength
+go-to: editarmy
+on-arrival: {!
+Q.South_army_strength += 25;
+!}
+
+Raised South Army Strength By 25,000
+
+@lowerSouth_armystrength
+go-to: editarmy
+on-arrival: {!
+Q.South_army_strength -= 25;
+!}
+
+Lowered South Army Strength By 25,000
