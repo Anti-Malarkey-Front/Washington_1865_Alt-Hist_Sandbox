@@ -14,7 +14,6 @@ go-to: sandbox_menu
 - @editbudget: Edit Budget
 - @editeconomy: Edit Economy
 - @editrelations: Edit Party Relations
-- @editpartysupport: Edit Party Support
 - @editfactions: Edit Republican Factions
 - @editparamilitary: Edit Paramilitary Groups
 - @editarmy: Edit Army and Police
@@ -226,7 +225,7 @@ Decreased tariffs by a point.
 @editrelations
 
 - @increasedemrel: Increase Relations With The Democrats
-- @decreasedemsrel: Decrease Relations With The Democrats
+- @decreasedemrel: Decrease Relations With The Democrats
 - @increaseliberalrel: Increase Relations With The Liberal Republican Party
 - @decreaseliberalrel: Decrease Relations With The Liberal Republican Party
 - @returnsandbox: Return To Sandbox Menu
