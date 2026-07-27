@@ -213,7 +213,7 @@ on-arrival: {!
 Q.tariffs += 1;
 !}
 
-Increased tariffs by a point.
+Increased tariffs by a point, like a true Republican.
 
 @decreasetariffs
 go-to: editeconomy
@@ -221,7 +221,7 @@ on-arrival: {!
 Q.tariffs -= 1;
 !}
 
-Decreased tariffs by a point.
+Decreased tariffs by a point, only democrats would lower tarrifs.
 
 @editrelations
 
