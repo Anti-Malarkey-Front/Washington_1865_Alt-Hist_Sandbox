@@ -82,6 +82,8 @@ Q.Radical_plan = 0;
 Q.veto = 0;
 Q.veto_reason = "";
 Q.civil_rights_act = 0;
+Q.civil_rights_act_passed = 0;
+Q.civil_rights = 0;
 
 // inter-party relations
 Q.dem_relation = 5;
@@ -116,8 +118,26 @@ Q.army_strength = 1000;
 Q.South_army_strength = 100;
 Q.army_militancy = 5;
 Q.army_loyalty = 0.8;
-Q.navy_strength = 200;
+Q.navy_strength = 150;
 Q.navy_loyalty = 0.8;
+
+//Spanish-American War stuff
+
+Q.war_stage = 0;
+Q.invasion_force_strength = 0;
+Q.cuban_blockade_strength = 0;
+Q.mambise_strength = 40;
+Q.spain_navy_strength= 185;
+Q.spain_coastal_defense_strength = 70;
+Q.spain_havana_garrison_strength = 180;
+Q.spain_relief_speed = 3;
+Q.battle_keys_outcome = "";
+Q.matanzas_outcome = "";
+Q.havana_siege_duration = "";
+Q.havana_outcome = "";
+Q.spain_surrendered = 0;
+Q.cuba_status = "";
+Q.puerto_rico_status = "";
 
 Q.speaker_election_needed = 0;
 Q.speaker_boosted_committee = "";
@@ -1866,7 +1886,7 @@ if (!Array.isArray(Q.timers)) {
         'foreign_policy', 'judiciary', 'labor_affairs', 'military_policy',
         'police', 'interior_policy', 'postmaster_policy', 'shuffle_cabinet', 'social_welfare',
         'homosexual_rights', 'economic_policy', 'coalition_affairs',
-        'war_guilt', 'womens_rights', 'high_inflation_ticker_timer',
+        'war_guilt', 'war_room_timer', 'high_inflation_ticker_timer',
         'monetary_policy',
         'constitutional_reform', 'labor_rights',
         'education_science', 'curriculum', 'civil_rights',
@@ -1879,6 +1899,7 @@ if (!Array.isArray(Q.timers)) {
 }
 Q.advisor_action_timer = 0;
 Q.recovery_ticker_timer = 0;
+Q.civil_rights_timer = 0;
 Q.crisis_program_timer = 0;
 Q.fundraising_timer = 0;
 Q.ideology_timer = 0;
@@ -1889,7 +1910,7 @@ Q.media_timer = 0;
 Q.enemies_timer = 0;
 Q.party_organizations_timer = 0;
 Q.rally_timer = 0;
-Q.reichsbanner_timer = 0;
+Q.war_room_timer = 0;
 Q.shuffle_leadership_timer = 0;
 Q.streetfighting_timer = 0;
 Q.peoples_party_timer = 0;
