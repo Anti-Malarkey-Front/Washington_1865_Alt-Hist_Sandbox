@@ -3,7 +3,6 @@ new-page: true
 tags: event
 view-if: year == 1865 and month == 6
 max-visits: 1
-on-arrival: military_policy_timer += 4
 
 = Demoblize the Army
 
@@ -11,4 +10,4 @@ The Army of the Potomac, once the backbone of the Union war effort, is officiall
 
 The transition to peace now begins, but peace brings its own kind of uncertainty. Union soldiers return home, demobilization picks up pace, and the task of securing the South politically and socially falls more heavily on civilian authorities and local commanders.
 
-This moment marks not just the end of hostilities — but the beginning of a new, difficult era.
+This moment marks not just the end of hostilities but the beginning of a new, difficult era.

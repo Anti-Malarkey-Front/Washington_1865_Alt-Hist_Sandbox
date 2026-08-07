@@ -133,9 +133,9 @@ Q.spain_havana_garrison_strength = 180;
 Q.spain_relief_speed = 3;
 Q.battle_keys_outcome = "";
 Q.matanzas_outcome = "";
-Q.havana_siege_duration = "";
 Q.havana_outcome = "";
 Q.spain_surrendered = 0;
+Q.US_lose = 0;
 Q.cuba_status = "";
 Q.puerto_rico_status = "";
 
@@ -161,7 +161,7 @@ Q.Panic_seen = 0;
 Q.classes = ['workers', 'middle_class', 'rural', 'freemen', 'immigrant_laborers', 'unemployed'];
 Q.parties = ['rep', 'dem', 'lib', 'other'];
 
-Q.southern_states = ['VA', 'NC', 'SC', 'GA', 'AL', 'FL', 'MS', 'AK', 'TX', 'LA'];
+Q.southern_states = ['VA', 'NC', 'SC', 'GA', 'AL', 'FL', 'MS', 'AR', 'TX', 'LA'];
 
 Q.VA_reconstructionScore = 0;
 Q.NC_reconstructionScore = 0;
@@ -170,9 +170,20 @@ Q.GA_reconstructionScore = 0;
 Q.AL_reconstructionScore = 0;
 Q.FL_reconstructionScore = 0;
 Q.MS_reconstructionScore = 0;
-Q.AK_reconstructionScore = 0;
+Q.AR_reconstructionScore = 0;
 Q.TX_reconstructionScore = 0;
 Q.LA_reconstructionScore = 0;
+
+Q.VA_reconstructionScoreBest = 0;
+Q.NC_reconstructionScoreBest = 0;
+Q.SC_reconstructionScoreBest = 0;
+Q.GA_reconstructionScoreBest = 0;
+Q.AL_reconstructionScoreBest = 0;
+Q.FL_reconstructionScoreBest = 0;
+Q.MS_reconstructionScoreBest = 0;
+Q.AR_reconstructionScoreBest = 0;
+Q.TX_reconstructionScoreBest = 0;
+Q.LA_reconstructionScoreBest = 0;
 
 Q.VA_canReadmit = 0;
 Q.NC_canReadmit = 0;
@@ -181,7 +192,7 @@ Q.GA_canReadmit = 0;
 Q.AL_canReadmit = 0;
 Q.FL_canReadmit = 0;
 Q.MS_canReadmit = 0;
-Q.AK_canReadmit = 0;
+Q.AR_canReadmit = 0;
 Q.TX_canReadmit = 0;
 Q.LA_canReadmit = 0;
 
@@ -192,7 +203,7 @@ Q.GA_admitted = 0;
 Q.AL_admitted = 0;
 Q.FL_admitted = 0;
 Q.MS_admitted = 0;
-Q.AK_admitted = 0;
+Q.AR_admitted = 0;
 Q.TX_admitted = 0;
 Q.LA_admitted = 0;
 
@@ -1798,6 +1809,8 @@ Q.reconstructionPlanActive = 0;
 
 Q.Candidate = "";
 Q.VPCandidate = "";
+Q.Winner_68 = "";
+Q.Winner_72 = "";
 
 Q.liberal_reunion_triggered = 0;
 Q.liberal_reunion_seen = 0;
@@ -1831,6 +1844,7 @@ Q.bureau_cost = 1;
 Q.bureau_target = "";
 Q.enforcement_acts = 0;
 Q.habeas_suspended = 0;
+Q.March_DC = 0;
 
 Q.europe_relation = 0;
 Q.french_mexico = 0;
@@ -1886,7 +1900,7 @@ if (!Array.isArray(Q.timers)) {
         'foreign_policy', 'judiciary', 'labor_affairs', 'military_policy',
         'police', 'interior_policy', 'postmaster_policy', 'shuffle_cabinet', 'social_welfare',
         'homosexual_rights', 'economic_policy', 'coalition_affairs',
-        'war_guilt', 'war_room_timer', 'high_inflation_ticker_timer',
+        'war_guilt', 'war_room', 'high_inflation_ticker_timer',
         'monetary_policy',
         'constitutional_reform', 'labor_rights',
         'education_science', 'curriculum', 'civil_rights',

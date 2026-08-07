@@ -219,7 +219,7 @@ Police loyalty: [+ Us_police_loyalty : loyalty +]
 
 Overall dissent: [+ dissent_percent : dissent +]
 
-**<span style="color: #7A1F5C;">**Radicals**</span>**
+**<span style="color: #7A1F5C;">Radicals</span>**
 
 They are the most extreme wing of the party who supported immediate, complete, and permanent eradication of slavery in the United States. But now the war is over, they are increasing pushing  to establish civil rights for former slaves and fully implement emancipation as well as making the South be punished for what they did.
 
@@ -243,7 +243,7 @@ Strength: [+ conservative_strength : strength +]
 
 Dissent: [+ conservative_dissent : dissent +]
 
-<span style="color: #DAA520;">Liberals</span>
+**<span style="color: #DAA520;">Liberals</span>**
 
 The <span style="color: #DAA520;">**Liberal Republicans**</span> were small in the early parts of reconstruction and grew thorugh out the late 1860s and wanted to end federal intervention in the South, promoting a more hands-off approach to governing, and emphasizing issues like civil service reform and limited government. 
 
@@ -353,7 +353,8 @@ if (d3 && window) {
     var lines = d3.linegraph(false, false,
         ["rep", "dem", "lib", "other"].filter(p => Q.election_records.some(r => r[p] > 0)),
         {"rep": "#B22222", "dem": "#003366", "lib": "#DAA520", "other": "#AAAAAA"},
-        {"rep": "Republican", "dem": "Democrat", "lib": "Liberal Republican", "other": "Other"}
+        {"rep": "Republican", "dem": "Democrat", "lib": "Liberal Republican", "other": "Other"},
+        100, 0, 10
     );
     lines.width(width).height(400);
     if (Q.election_records.length > 0) {
@@ -364,7 +365,8 @@ if (d3 && window) {
         var lines_2 = d3.linegraph(true, true,
             ["rep", "dem", "lib", "other"].filter(p => Q.party_support_records.some(r => r[p] > 0)),
             {"rep": "#B22222", "dem": "#003366", "lib": "#DAA520", "other": "#AAAAAA"},
-            {"rep": "Republican", "dem": "Democrat", "lib": "Liberal Republican", "other": "Other"}
+            {"rep": "Republican", "dem": "Democrat", "lib": "Liberal Republican", "other": "Other"},
+            100, 0, 10
         );
         lines_2.width(width).height(400);
         d3.select("#party_support_history").datum(Q.party_support_records).call(lines_2);

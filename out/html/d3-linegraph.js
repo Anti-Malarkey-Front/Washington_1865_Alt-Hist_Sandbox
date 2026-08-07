@@ -19,7 +19,7 @@ d3.linegraph = function(noTicks, noDots, parties, partyColors, partyNames, dataM
         parties = ['rep', 'dem', 'other'];
     }
     if (!partyColors) {
-        partyColors = {'rep': '#E3000F', 'dem': '#2644d9', 'other': '#a0a0a0'};
+        partyColors = {'rep': '#E3000F', 'dem': '#2644d9', 'other': '#00cc00'};
     }
     if (!partyNames) {
         partyNames = {'rep': 'Republicans', 'dem': 'Democrats','other': 'Others'};
@@ -40,7 +40,7 @@ d3.linegraph = function(noTicks, noDots, parties, partyColors, partyNames, dataM
      dataset.each(function (data) {
       const dates = data.map(d => new Date(d.date));
       // Map the data to an array of arrays of {x, y} tuples.
-      const series = parties.map(party => data.map(d => ({'x': new Date(d.date), 'y': d[party], 'series': party})));
+      const series = parties.map(party => data.map(d => ({'x': new Date(d.date), 'y': d[party], 'series': party})).filter(d => d.y != null && !isNaN(d.y)));
 
       // Declare the x (horizontal position) scale.
       const maxDate = d3.max(dates);
@@ -89,6 +89,7 @@ d3.linegraph = function(noTicks, noDots, parties, partyColors, partyNames, dataM
           .call(d3.axisLeft(yScale));
 
       const partyLine = (party) => d3.line()
+          .defined(d => d[party] != null && !isNaN(d[party]))
           .x(d => xScale(new Date(d.date)))
           .y(d => yScale(d[party]));
 

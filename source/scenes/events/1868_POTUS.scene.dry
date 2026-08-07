@@ -252,6 +252,7 @@ on-arrival: {!
     
     // GRANT CABINET
     if (Q.Candidate == "Grant") {
+        Q.Winner_68 = "Grant";
         Q.sect_state = "Hamilton Fish";
         Q.sect_state_party = "R";
         Q.sect_treasury = "George S. Boutwell";
@@ -270,6 +271,7 @@ on-arrival: {!
     
     // WADE CABINET
     if (Q.Candidate == "Wade") {
+        Q.Winner_68 = "Wade";
         Q.sect_state = "Charles Sumner";
         Q.sect_state_party = "R";
         Q.sect_treasury = "Henry C. Carey";
@@ -288,6 +290,7 @@ on-arrival: {!
     
     // CHASE CABINET
     if (Q.Candidate == "Chase") {
+        Q.Winner_68 = "Chase";
         Q.sect_state = "William H. Seward";
         Q.sect_state_party = "R";
         Q.sect_treasury = "John Sherman";
@@ -305,7 +308,7 @@ on-arrival: {!
     }
 !}
 
-The <span style="color: #c00000;">**Republicans**</span> have managed to get a majority of the electors in this election. [? if president == "Wade": The American people have signaled their mandate for Benjamin Wade to serve as President and work with congress. ?][? if president == "Grant": Grant's war career of saving the Union has made an impression on voters. Hopefully he will lead us into a brighter future. ?][? if president == "Chase": Chase is elected president — the <span style="color: #7A1F5C;">**Radical Republicans**</span> despise him and this could lead to a crisis within the party, but the <span style="color: #9D2933;">**Moderates**</span> and <span style="color: #B5651D;">**Conservatives**</span> are cheering with this return to normalcy in the Executive Mansion. ?]
+The <span style="color: #c00000;">**Republicans**</span> have managed to get a majority of the electors in this election. [? if president == "Wade": The American people have signaled their mandate for Benjamin Wade to serve as President and work with congress. ?][? if president == "Grant": Grant's war career of saving the Union has made an impression on voters. Hopefully he will lead us into a brighter future. ?][? if president == "Chase": Chase is elected president. The <span style="color: #7A1F5C;">**Radical Republicans**</span> despise him and this could lead to a crisis within the party, but the <span style="color: #9D2933;">**Moderates**</span> and <span style="color: #B5651D;">**Conservatives**</span> are cheering with this return to normalcy in the Executive Mansion. ?]
 
 @defeat_dem
 title: The <span style="color: #0015bc;">**Democrats**</span> have won the presidency.
@@ -336,7 +339,7 @@ on-arrival: {!
  How did you lose this election? It was programmed to be basically impossible to lose!
 
 @house_decides
-title: No majority — the election goes to the House!
+title: No majority with the election going to the House!
 subtitle: Rep: [+ repEVTotal +] | Dem: [+ demEVTotal +][? if liberal_split = 1 : | Lib: [+ libEVTotal +] ?]
 view-if: potus_winner = "house"
 on-arrival: {!
@@ -346,6 +349,7 @@ on-arrival: {!
     Q.president = Q.Candidate;
     Q.president_party = "rep"
     if (Q.Candidate == "Grant") {
+      Q.Winner_68 = "Grant";
       Q.sect_state = "Hamilton Fish";
       Q.sect_state_party = "R";
       Q.sect_treasury = "George S. Boutwell";
@@ -364,6 +368,7 @@ on-arrival: {!
     
     // WADE CABINET
     if (Q.Candidate == "Wade") {
+        Q.Winner_68 = "Wade";
         Q.sect_state = "Charles Sumner";
         Q.sect_state_party = "R";
         Q.sect_treasury = "Henry C. Carey";
@@ -382,6 +387,7 @@ on-arrival: {!
     
     // CHASE CABINET
     if (Q.Candidate == "Chase") {
+        Q.Winner_68 = "Chase";
         Q.sect_state = "William H. Seward";
         Q.sect_state_party = "R";
         Q.sect_treasury = "John Sherman";
