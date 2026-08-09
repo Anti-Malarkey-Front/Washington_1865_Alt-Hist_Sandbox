@@ -138,6 +138,7 @@ for (let state of Q.states) {
   if (winner === "lib") color = "#DAA520";
   Q[state.toLowerCase() + "_winner_color"] = color;
 
+
   let margin = votes.rep - votes.dem;
   let marginPct = ((Math.abs(margin) / (votes.rep + votes.dem + (votes.lib || 0))) * 100).toFixed(2);
   console.log(`${state} winner: ${winner}, rep=${votes.rep.toFixed(0)}, dem=${votes.dem.toFixed(0)}, lib=${votes.lib.toFixed(0)}, margin=${marginPct}%`);
@@ -208,8 +209,23 @@ on-display: {!
     dc: Q.dc_winner_color,
   };
 
+  // NEW: build results from the percentages saved during on-arrival,
+  // instead of hardcoding two states by hand
+  let results = {};
+  for (let state of Q.states) {
+    let key = state.toLowerCase();
+    let entry = {
+      "Republican": Q[state + "_rep_pct"] || 0,
+      "Democratic": Q[state + "_dem_pct"] || 0,
+    };
+    if (Q.liberal_split && (Q[state + "_lib_pct"] || 0) > 0) {
+      entry["Liberal Republican"] = Q[state + "_lib_pct"];
+    }
+    results[key] = entry;
+  }
+
   function drawMap() {
-    ElectoralMap.draw({ container: "#electoral-map", winners: winners });
+    ElectoralMap.draw({ container: "#electoral-map", winners: winners, results: results });
   }
 
   if (typeof ElectoralMap !== 'undefined') {
