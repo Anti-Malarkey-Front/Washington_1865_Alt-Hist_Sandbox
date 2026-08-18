@@ -77,7 +77,6 @@ for (let state of Q.states) {
 
     if (pop <= 0) continue;
 
-    // 50% local, 50% national blend (was 20/80 — too anchored to national)
     let localRep   = Q[state + "_" + cls + "_rep"] || 0;
     let localDem   = Q[state + "_" + cls + "_dem"] || 0;
     let localLib   = Q[state + "_" + cls + "_lib"] || 0;
@@ -106,8 +105,6 @@ for (let state of Q.states) {
     if (Q.liberal_split) votes.lib += pop * (adjLib / total);
   }
 
-  // Close state nudge — weaker now, just a small thumb on the scale
-  // Player actions can still fully override this
   if (closeStates[state] !== undefined) {
     let nudge = closeStates[state] * 0.1; // only 30% as strong as before
     let randomJitter = (Math.random() * 0.8) - 0.4; // wider jitter
@@ -163,8 +160,12 @@ else if (Q.demEVTotal >= majority) Q.potus_winner = "dem";
 else if (Q.libEVTotal >= majority) Q.potus_winner = "lib";
 else Q.potus_winner = "house";
 
-console.log(`EV totals: REP=${Q.repEVTotal}, DEM=${Q.demEVTotal}, LIB=${Q.libEVTotal}`);
-console.log(`POTUS winner: ${Q.potus_winner}`);
+if(Q.demEVTotal == 0 && Q.libEVTotal == 0)
+{
+  this.achieve("washington")
+}
+
+
 !}
 on-display: {!
   var winners = {
@@ -262,9 +263,9 @@ title: <span style="color: #c00000;">**Republicans**</span> won the election!
 subtitle: <span style="color: #c00000;">**Republicans**</span>: [+ repEVTotal +] electoral votes
 view-if: potus_winner = "rep"
 on-arrival: {!
-    Q.president = Candidate;
+    Q.president = Q.Candidate;
     Q.vice_president = Q.VPCandidate; 
-    president_party = "rep";
+    Q.president_party = "rep";
     
     // GRANT CABINET
     if (Q.Candidate == "Grant") {
@@ -334,6 +335,7 @@ on-arrival: {!
     Q.president = "Horatio Seymour";
     Q.vice_president = Q.VPCandidate; 
     Q.president_party = "dem";
+    Q.lose_vote = 1;
     
     // SEYMOUR CABINET
     Q.sect_state = "James Guthrie";
@@ -359,13 +361,13 @@ title: No majority with the election going to the House!
 subtitle: Rep: [+ repEVTotal +] | Dem: [+ demEVTotal +][? if liberal_split = 1 : | Lib: [+ libEVTotal +] ?]
 view-if: potus_winner = "house"
 on-arrival: {!
-  // House decides — Republican House majority means Republican wins
   if (Q.house_majority >= 2) {
     Q.potus_winner = "rep";
     Q.president = Q.Candidate;
     Q.president_party = "rep"
     if (Q.Candidate == "Grant") {
       Q.Winner_68 = "Grant";
+      Q.president_party = "rep"
       Q.sect_state = "Hamilton Fish";
       Q.sect_state_party = "R";
       Q.sect_treasury = "George S. Boutwell";
@@ -385,6 +387,7 @@ on-arrival: {!
     // WADE CABINET
     if (Q.Candidate == "Wade") {
         Q.Winner_68 = "Wade";
+        Q.president_party = "rep"
         Q.sect_state = "Charles Sumner";
         Q.sect_state_party = "R";
         Q.sect_treasury = "Henry C. Carey";
@@ -404,6 +407,7 @@ on-arrival: {!
     // CHASE CABINET
     if (Q.Candidate == "Chase") {
         Q.Winner_68 = "Chase";
+        Q.president_party = "rep"
         Q.sect_state = "William H. Seward";
         Q.sect_state_party = "R";
         Q.sect_treasury = "John Sherman";
@@ -452,7 +456,7 @@ No candidate has secured a majority of electoral votes. Under the Constitution, 
 title: Something has gone very wrong.
 subtitle: Other: [+ otherEVTotal +] votes
 view-if: potus_winner = "other"
-on-arrival: president = "???"; president_party = "???";
+on-arrival: president = "???"; president_party = "???"; lose_vote = 1;
 
 This outcome was not supposed to be possible. Someone has been tampering with the console.
 

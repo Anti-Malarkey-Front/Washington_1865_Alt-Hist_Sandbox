@@ -6,15 +6,11 @@ on-arrival: {!
     Q.panic_triggered = 1;
     Q.panic_pending = 0;
 
-    // The bubble pops — speculative exposure releases in a single shock
     Q.economic_expansion = Math.max(0, Q.economic_expansion - 50);
 
-    // Direct hit to growth and the macro unemployment rate
     Q.economic_growth -= 4.5;
     Q.unemployment_rate += 6;
 
-    // Inflation moves opposite depending on the money regime —
-    // a credit crunch is deflationary whether or not Greenbacks are still circulating
     if (Q.GreenBacks == 1) {
         Q.inflation -= 0.8;
     } else {
@@ -33,8 +29,12 @@ on-arrival: {!
     Q.dem_relation -= 5;
     Q.reconstruction_support -= 2;
 
-    Q.workers_dem += 5;
-    Q.rural_dem += 5;
+    Q.workers_dem += 10;
+    Q.worker_rep -= 5
+    Q.rural_dem += 10;
+    Q.rural_rep -= 5;
+    Q.immigrant_laborers_dem += 10;
+    Q.immigrant_laborer_rep -= 5;
 !}
 tags: event
 view-if: (year = 1873 and month >= 9) or panic_pending = 1
@@ -42,7 +42,7 @@ max-visits: 1
 
 = The Panic of [+ year +]
 
-As the month of [+ month +] hits, the Jay Cooke & Company one of the most prestigious banking house in the United States, the firm that financed the Union war effort itself closes its doors.
+As the month of [+ month : month +] hits, the Jay Cooke & Company one of the most prestigious banking house in the United States, the firm that financed the Union war effort itself closes its doors.
 
 The news hits Wall Street like a cannon shot. Cooke's bank had poured millions into the Northern Pacific Railroad, one of dozens of rail ventures that had consumed the easy credit of the postwar boom years. When the loans came due and the collateral proved worthless, the whole edifice collapsed. Within days, the New York Stock Exchange suspends trading for ten days an event without precedent in American history.
 
@@ -52,7 +52,7 @@ The <span style="color: #0015bc;">**Democrats**</span>, who have spent years poi
 
 Our party is divided over what, if anything, the federal government should do.
 
-- @response: what do we do?
+- @response: What do we do?
 
 @response
 
@@ -68,31 +68,25 @@ What course do we take?
 
 @laissez_faire
 on-arrival: {!
-    // Conservative/Liberal approval, worker anger
+    Q.laissez_faire = 1;
     Q.conservative_dissent -= 5;
     Q.conservative_strength += 3;
     Q.liberal_dissent -= 3;
     Q.liberal_strength += 2;
     Q.radical_dissent += 6;
     Q.moderate_dissent += 3;
-
-    // Economy slowly corrects but workers suffer longer
     Q.unemployment_rate += 1.5;
     Q.economic_growth -= 0.5;
     Q.workers_dem += 4;
     Q.immigrant_laborers_dem += 3;
     Q.unemployed_dem += 4;
     Q.middle_class_dem += 2;
-
-    // Middle class and rural appreciate restraint
     Q.middle_class_rep += 3;
     Q.rural_rep += 2;
-
-    // Budget improves slightly from reduced spending pressure
     Q.budget += 1;
 !}
 
-We issue a statement affirming our faith in the self-correcting nature of free markets. The government did not cause this panic — railroad speculators and reckless bankers did — and it is not the government's place to paper over the consequences of private greed with public money.
+We issue a statement affirming our faith in the self-correcting nature of free markets. The government did not cause this panic but the railroad speculators and reckless bankers did. Tt is not the government's place to paper over the consequences of private greed with public money.
 
 The conservative and liberal press applaud our restraint. The labor newspapers are savage. In the tenements of New York and the mining towns of Pennsylvania, men curse the party that offers philosophy while their children go hungry.
 
@@ -123,7 +117,7 @@ on-arrival: {!
     Q.europe_relation -= 2;   // foreign creditors alarmed
 !}
 
-We authorize an expansion of Greenback currency — paper money not backed by gold — to relieve the credit squeeze strangling commerce. The theory is straightforward: tight money caused the crash, and loose money will ease the recovery.
+We authorize an expansion of Greenback currency to relieve the credit squeeze strangling commerce. The theory is straightforward: tight money caused the crash, and loose money will ease the recovery.
 
 The effect is immediate and polarizing. Workers and debtors, who benefit from mild inflation, return some of their support to us. Creditors, bankers, and the <span style="color: #DAA520;">**Liberal Republican**</span> press react with alarm, warning of ruin and depreciation. European investors begin to look at American bonds with fresh suspicion.
 
@@ -154,7 +148,7 @@ on-arrival: {!
     Q.reconstruction_support -= 5;
 !}
 
-We announce significant cuts to federal spending — Reconstruction programs, public works, federal employment rolls. The goal is to balance the books, restore confidence in the government's finances, and signal to markets that the era of loose spending is over.
+We announce significant cuts to federal spending. The goal is to balance the books, restore confidence in the government's finances, and signal to markets that the era of loose spending is over.
 
 The financial press approves. <span style="color: #B5651D;">**Conservative Republicans**</span> finally feel the party is speaking their language.
 
@@ -188,7 +182,7 @@ on-arrival: {!
     Q.rural_rep += 1;
 !}
 
-We appropriate emergency funds for public works — road construction, harbor improvement, federal building projects in the cities hardest hit by unemployment. The goal is simple: put men to work, put wages in their pockets, and put food on their tables while the economy finds its footing.
+We appropriate emergency funds for public works such as road construction, harbor improvement, federal building projects in the cities hardest hit by unemployment. The goal is simple: put men to work, put wages in their pockets, and put food on their tables while the economy finds its footing.
 
 The response from working people is immediate and warm. <span style="color: #c00000;">**Republicans**</span> who had been drifting toward the <span style="color: #0015bc;">**Democrats**</span> return to our fold. Freedmen, who have suffered worst, see the government acting on their behalf for the first time since the early days of Reconstruction.
 
@@ -214,12 +208,8 @@ on-arrival: {!
     Q.dem_relation -= 3;
 !}
 
-We call for a Congressional investigation into the railroad speculation that triggered the collapse — the land grants, the bond guarantees, the inflated stock schemes that enriched insiders while leaving ordinary investors holding worthless paper.
+We call for a Congressional investigation into the railroad speculation that triggered the collapse.
 
-The public approves. The image of <span style="color: #c00000;">**Republican**</span> reformers holding the railroad barons accountable appeals across class lines — workers, farmers, small businessmen all want to see the men who caused this panic answer for it.
+The public approves. The image of <span style="color: #c00000;">**Republican**</span> reformers holding the railroad barons accountable appeals across class lines. Workers, farmers, small businessmen all want to see the men who caused this panic answer for it.
 
-Then the investigation turns up Credit Mobilier.
-
-The construction company scandal in which <span style="color: #c00000;">**Republican**</span> congressmen received discounted shares in exchange for favorable legislation — lands like a second shock. The <span style="color: #0015bc;">**Democrats**</span> trumpet it from every platform. Several of our own members are implicated. The reformist investigation we launched to save our reputation has become a source of fresh embarrassment.
-
-The truth, it turns out, has a cost as well.
+Then the investigation turns up Credit Mobilier. The construction company scandal in which <span style="color: #c00000;">**Republican**</span> congressmen received discounted shares in exchange for favorable legislation. The <span style="color: #0015bc;">**Democrats**</span> trumpet it from every platform. Several of our own members are implicated. The reformist investigation we launched to save our reputation has become a source of fresh embarrassment.

@@ -60,7 +60,7 @@ for (let state of Q.states) {
       libVotes += pop * (adjLib / totalPct);
       otherVotes += pop * (adjOther / totalPct);
 
-      if (Q.fifteenth == 0) {
+      if (Q.fifthteen == 0) {
         repVotes *= 1.0025;
       }
     }
@@ -129,7 +129,7 @@ if (Q.liberal_split === 1 && Q.liberal_reunion_seen !== 1) {
     let libPct = (libSeats / totalHouse) * 100;
  
     // They've lost balance of power (can't kingmake) AND dropped below 8% of seats
-    // Adjust 8% threshold to taste — lower = harder to trigger reunion
+    // Adjust 8% threshold to taste. lower = harder to trigger reunion
     let libCanKingmake = Q.rep_lib_working_majority === 0 && libSeats > 0;
     let libCollapsed = libPct < 8;
  
@@ -279,7 +279,7 @@ With two-thirds of the House, <span style="color: #c00000;">**Republicans**</spa
 title: <span style="color: #c00000;">**Republicans**</span> and <span style="color: #DAA520;">**Liberal Republicans**</span> hold a working majority
 subtitle: <span style="color: #c00000;">**Republicans**</span>: [+ rep_r +] seats, <span style="color: #DAA520;">**Liberal Republicans**</span>: [+ lib_r +] seats
 view-if: house_majority = 0 and rep_lib_working_majority = 1 and liberal_split = 1
-on-arrival: speaker_election_needed = 1
+on-arrival: speaker_election_needed = 1; majority_lost = 1; lose_vote = 0;
 
 Neither party holds an outright majority, but <span style="color: #c00000;">**Republicans**</span> and <span style="color: #DAA520;">**Liberal Republicans**</span> together command enough seats to pass legislation if they can find common ground. Their cooperation will not come without a price.
 
@@ -287,7 +287,7 @@ Neither party holds an outright majority, but <span style="color: #c00000;">**Re
 title: <span style="color: #c00000;">**Republicans**</span> lose the House
 subtitle: <span style="color: #c00000;">**Republicans**</span>: [+ rep_r +] seats
 view-if: house_majority = 0 and rep_lib_working_majority = 0 and dem_r > rep_r
-on-arrival: speaker_election_needed = 1
+on-arrival: speaker_election_needed = 1; majority_lost = 1; lose_vote = 0;
 
 The <span style="color: #0015bc;">**Democrats**</span> have taken control of the House of Representatives.
 
@@ -295,14 +295,14 @@ The <span style="color: #0015bc;">**Democrats**</span> have taken control of the
 title: <span style="color: #DAA520;">**Liberal Republicans**</span> hold the balance of power
 subtitle: <span style="color: #DAA520;">**Liberal Republicans**</span>: [+ lib_r +] seats
 view-if: house_majority = 0 and rep_lib_working_majority = 0 and dem_r <= rep_r and liberal_split = 1
-on-arrival: speaker_election_needed = 1
+on-arrival: speaker_election_needed = 1; majority_lost = 1; lose_vote = 0;
 
-No party commands a majority. The <span style="color: #DAA520;">**Liberal Republicans**</span> find themselves in the position of kingmakers — their votes will determine whether Reconstruction legislation advances or stalls.
+No party commands a majority. The <span style="color: #DAA520;">**Liberal Republicans**</span> find themselves in the position of kingmakers and their votes will determine whether Reconstruction legislation advances or stalls.
 
 @house_tie
 title: The House is tied!
 subtitle: Both parties are neck and neck
 view-if: rep_r = dem_r and house_majority = 0 and rep_lib_working_majority = 0
-on-arrival: speaker_election_needed = 1
+on-arrival: speaker_election_needed = 1; majority_lost = 1; lose_vote = 0;
 
 A tied House will cause major legislative deadlock in the months ahead.

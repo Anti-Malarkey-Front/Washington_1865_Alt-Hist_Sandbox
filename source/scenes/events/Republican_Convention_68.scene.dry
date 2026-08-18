@@ -15,11 +15,8 @@ Yet the cause is far from lost. The <span style="color: #c00000;">**Republican P
 - @Chase: Salmon P. Chase
 
 @Grant
-subtitle: [? if president = "Johnson": Grant is our default candidate ?][? if president = "Wade": We need to convince the Party with 2 resources ?]
+subtitle: [? if president = "Johnson": Grant is our default candidate ?]
 on-arrival: {! 
-    if(Q.president = "Wade"){
-        Q.resources -= 2; 
-    }
     Q.Candidate = "Grant";
     Q.freedmen_rep += 2;
     Q.rural_rep += 1;
@@ -34,6 +31,7 @@ on-arrival: {!
     Q.liberal_dissent += 2;
     Q.liberal_strength -= 2;
 !}
+face-image: img/portraits/Ulysses_S._Grant_1870-1880.jpg
 go-to: VP
 
 Ulysses S. Grant is chosen as our candidate for President. His war record, humble beginnings, and willingness to support the Freedmen make him a strong choice for the party.
@@ -58,6 +56,7 @@ on-arrival: {!
     Q.liberal_dissent += 3;
     Q.liberal_strength -= 3;
 !}
+face-image: img/portraits/Benjamin_F_Wade.jpg
 go-to: VP
 
 Benjamin Wade is chosen as our candidate for President. [? if president == "Wade": He will continue his leadership, much to the dismay of the <span style="color: #B5651D;">**Conservatives**</span> ?][? if president == "Johnson": His Senate career and radical ideas may appeal to the party's progressive base ?]
@@ -80,9 +79,10 @@ on-arrival: {!
     Q.conservative_dissent -= 2;
     Q.conservative_strength += 2;
 !}
+face-image: img/portraits/Salmon-P-Chase.webp
 go-to: VP
 
-Salmon P. Chase is chosen as our candidate. He is supported by the Old Guard and the "Anti-Grant" faction, who fear nominating a military strongman. This choice upsets the <span style="color: #7A1F5C;">**Radicals**</span>, who resent Chase [? if president == "Johnson": as they believe his impartial handling of Andrew Johnson's impeachment blocked their opportunity to "railroad" the President.?].
+Salmon P. Chase is chosen as our candidate. He is supported by the Old Guard and the "Anti-Grant" faction, who fear nominating a military strongman. This choice upsets the <span style="color: #7A1F5C;">**Radicals**</span>, who resent Chase [? if president == "Johnson" and House_Impeach = 1: as they believe his impartial handling of Andrew Johnson's impeachment blocked their opportunity to "railroad" the President.?].
 
 However, some fear that Chase's history of shifting party allegiances could make him an unreliable candidate for President.
 
@@ -90,37 +90,51 @@ However, some fear that Chase's history of shifting party allegiances could make
 
 It is time to choose a running mate for our presidential candidate. The VP choice can balance the ticket and appeal to different factions of the party.
 
+The options range from the <span style="color: #9D2933;">**Moderate**</span> choice Schuyler Colfax to more partisan candidates such as <span style="color: #7A1F5C;">**Radical**</span> Henry Wilson or <span style="color: #B5651D;">**Conservative**</span> Reuben Fenton.
+
 - @Colfax: Schuyler Colfax
 - @Wilson: Henry Wilson
 - @WadeVP: Benjamin Wade
 - @Fenton: Reuben Fenton
 
 @Colfax
-subtitle: Moderate, safe choice
+subtitle: **<span style="color: #9D2933;">Moderate</span>**, safe choice
+face-image: img/portraits/Schuyler_Colfax,_photo_portrait_seated,_c1855-1865.jpg
 on-arrival: VPCandidate = "Colfax"; moderate_strength += 2; conservative_strength += 2; radical_dissent += 1; middle_class_rep += 2; rural_rep += 1; workers_rep += 1;
 
-Schuyler Colfax is chosen as Vice President. His moderate stances and Union loyalty appeal broadly to the party's mainstream and conservative wings, though <span style="color: #7A1F5C;">**Radicals**</span> are less enthused.
+Schuyler Colfax is chosen as Vice President. His **<span style="color: #9D2933;">moderate</span>** stances and Union loyalty appeal broadly to the party's mainstream and **<span style="color: #B5651D;">conservative</span>** wings, though <span style="color: #7A1F5C;">**Radicals**</span> are less enthused.
+
+His presence on the ticket reassures many Republicans that the party will remain united behind Reconstruction while avoiding unnecessary political confrontation.
 
 @Wilson
-subtitle: Strong Radical support
+subtitle: Strong <span style="color: #7A1F5C;">**Radical**</span> support
 choose-if: radical_strength >= 30
+face-image: img/portraits/Henry_Wilson,_VP_of_the_United_States.jpg
 unavailable-subtitle: The <span style="color: #7A1F5C;">**Radicals**</span> are not powerful enough to push Wilson
 on-arrival: VPCandidate = "Wilson"; radical_strength += 3; radical_dissent -= 2; radical_dissent -= 2; workers_rep += 3; freemen_rep += 2; immigrant_laborers_rep += 1;
 
 Henry Wilson is chosen as Vice President. His <span style="color: #7A1F5C;">**Radical Republican**</span> credentials and ties to labor help solidify support among progressive voters, but worry moderates.
 
+His nomination signals a greater willingness to pursue the goals of Reconstruction with renewed energy and determination.
+
 @WadeVP
 view-if: Candidate != "Wade" and president != "Wade"
 choose-if: radical_strength >= 30
+face-image: img/portraits/Benjamin_F_Wade.jpg
 unavailable-subtitle: [? if radical_strength < 30: The <span style="color: #7A1F5C;">**Radicals**</span> lack the power to force Wade onto the ticket ?]
 on-arrival: VPCandidate = "Wade"; radical_strength += 4; radical_dissent -= 4; moderate_dissent += 2; moderate_dissent += 2; freemen_rep += 3; workers_rep += 2; middle_class_rep -= 1; rural_rep -= 1;
 
 Benjamin Wade is chosen as Vice President. His leadership among <span style="color: #7A1F5C;">**Radical Republicans**</span> electrifies the party's left wing, but deeply alarms moderates and conservatives.
 
+Few doubt that Wade's selection will strengthen the influence of the <span style="color: #7A1F5C;">**Radicals**</span> within the administration and the party alike.
+
 @Fenton
 subtitle: Strategic Pick: -1 Resource
 choose-if: resources >= 1
 unavailable-subtitle: Not Enough Resources
+face-image: img/portraits/Reuben_Fenton_-_Brady-Handy.jpg
 on-arrival: resources -= 1; VPCandidate = "Fenton"; moderate_strength += 1; NY_workers_rep += 1; NY_middle_class_rep += 1; NY_middle_class_rep += 2; NY_rural_rep += 1; NY_freemen_rep += 1; NY_immigrant_laborers_rep += 1; NY_unemployed_rep += 1;
 
 Reuben Fenton is chosen as Vice President. As governor of New York, he will bring new energy to the campaign as the state will bring greater <span style="color: #c00000;">**Republican**</span> support to New York.
+
+His political organization and experience in New York are expected to strengthen the party's position in one of the nation's most important electoral battlegrounds.

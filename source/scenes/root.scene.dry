@@ -42,7 +42,7 @@ Q.dues = 2;
 // the state of the party
 Q.dissent = 0.05;
 Q.dissent_percent = 5;
-Q.amendmentResult = 0;
+Q.amendmentResult = 1;
 // factions
 Q.factions = ['radical', 'moderate', 'conservative', 'liberal'];
 Q.radical_strength = 20;
@@ -54,6 +54,7 @@ Q.conservative_dissent = 5;
 Q.liberal_strength = 5;
 Q.liberal_dissent = 10;
 Q.liberal_split = 0;
+Q.Greeley_Camp = 0;
 Q.liberal_split_timer = 0;
 
 //Democrat Factions
@@ -72,18 +73,27 @@ Q.house_impeach_passed = 0;
 Q.house_impeachment_total = 0;
 Q.impeachment_unlocked = 0;
 
+Q.impeach_month = 0;
+
 Q.rep_lib_working_majority = 0;
 Q.rep_lib_working_majority_senate = 0;
+
+Q.majority_lost = 0;
 
 Q.reconstruction_support = 70;
 Q.Johnson_plan = 0;
 Q.Moderate_plan = 0;
 Q.Radical_plan = 0;
+Q.Radical_plan_Count = 0;
+Q.Carpetbagger_Supreme = 0;
 Q.veto = 0;
 Q.veto_reason = "";
 Q.civil_rights_act = 0;
 Q.civil_rights_act_passed = 0;
 Q.civil_rights = 0;
+
+Q.lose_vote = 0;
+Q.veto_success = 0;
 
 // inter-party relations
 Q.dem_relation = 5;
@@ -94,6 +104,7 @@ Q.kkk_strength = 1;
 Q.kkk_militancy = 0.01;
 Q.kkk_history = [];
 Q.whiteL_strength = 0;
+Q.kkk_rise = 0;
 Q.whiteL_militancy = 0;
 Q.whiteL_formed = 0;
 Q.white_league_trigger = 0;
@@ -150,6 +161,7 @@ Q.fortheen_A = 0;
 Q.fifthteen = 0;
 Q.Blain = 0;
 Q.limit = 1;
+Q.Forty_Acres = 0;
 
 Q.budget = 4;
 Q.inflation = 3.82;
@@ -157,7 +169,7 @@ Q.GreenBacks = 1;
 Q.economic_growth = 2.9;
 Q.economic_expansion = 0;
 Q.Panic_seen = 0;
-
+Q.laissez_faire = 0;
 
 Q.classes = ['workers', 'middle_class', 'rural', 'freemen', 'immigrant_laborers', 'unemployed'];
 Q.parties = ['rep', 'dem', 'lib', 'other'];
@@ -1888,7 +1900,7 @@ Q.tariffs = 5;
 
 Q.electoral_threshold = 0;
 
-Q.n_advisors = 0;
+Q.n_advisors = 3;
 if (!Array.isArray(Q.timers)) {
     Q.timers = ['advisor_action', 'bureau_timer', 'crisis_program',
         'fundraising', 'ideology',
@@ -1963,6 +1975,7 @@ Q.coalition_affairs_timer = 0;
 Q.emergency_cuts_timer = 0;
 Q.unemployment_insurance_timer = 0;
 Q.kkk_ban_timer = 0;
+Q.Disputed_Yes = 1;
 Q.sh_ban_timer = 0;
 Q.kpd_ultimatum_timer = 0;
 Q.march_on_berlin_timer = 0;
@@ -1986,6 +1999,7 @@ Q.schurz_advisor = 0;
 Q.trumbull_advisor = 0;
 Q.cox_advisor = 0;
 Q.douglass_advisor = 0;
+Q.douglass_ear = 0;
 Q.greeley_dead = 0;
 
 !}
@@ -2006,11 +2020,11 @@ For more information on the politics of Reconstruction, see the "Library" page o
 - @1928_historical: Begin (historical mode)
 
 @1928_easy
-on-arrival: difficulty = -1; resources = 4; dues = 3; rb_strength = 2500; kpd_relation = 29; z_relation = 54; dvp_relation = 49; budget = 5;
+on-arrival: difficulty = -1; resources = 4; dues = 3; Union_League_strength = 75; budget = 5;
 go-to: 1928_main
 
 @1928_hard
-on-arrival: difficulty = 1; resources = 0; dues = 1; rb_strength = 1000; reformist_dissent = 25; left_dissent = 30; labor_dissent = 25; center_dissent = 25; z_relation = 41; kpd_relation = 16; dvp_relation = 31; budget = 3;
+on-arrival: difficulty = 1; resources = 0; dues = 1; Union_League_strength = 30; radical_dissent = 25; conservative_dissent = 30; liberal_dissent = 25; moderate_dissent = 25; budget = 3;
 go-to: 1928_main
 
 @1928_historical
@@ -2020,14 +2034,11 @@ Q.difficulty = 2;
 Q.historical_mode = 1;
 Q.resources = 2;
 Q.dues = 1;
-Q.rb_strength = 2000;
-Q.reformist_dissent = 25;
-Q.left_dissent = 30;
-Q.labor_dissent = 25;
-Q.center_dissent = 25;
-Q.z_relation = 41;
-Q.kpd_relation = 16;
-Q.dvp_relation = 31;
+Q.Union_League_strength = 60;
+Q.radical_dissent = 25;
+Q.conservative_dissent = 30;
+Q.liberal_dissent = 25;
+Q.moderate_dissent = 25;
 Q.budget = 2;
 this.state.disableSaves = true;
 !}

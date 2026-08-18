@@ -6,20 +6,19 @@ on-arrival: {!
     Q.inflation *= 1.12;
     Q.rural_rep -= 5;
     Q.rural_dem += 5;
-    Q.reconstruction_support -= 2;
-
-    // Political shockwave
     Q.moderate_dissent += 4;
     Q.conservative_dissent += 3;
-    Q.liberal_dissent += 6;    // liberals were already suspicious of Grant
+    Q.liberal_dissent += 6;
     Q.radical_dissent += 3;
-    Q.dem_relation -= 6;       // Democrats smell corruption
+    Q.dem_relation -= 6;
     Q.middle_class_dem += 3;
     Q.workers_dem += 2;
+    Q.dem_reform_strength += 5;
 !}
 tags: event
 view-if: year = 1869 and month >= 9 and president = "Grant"
 max-visits: 1
+face-image: img/Gold_room_scene_on_Black_Friday.jpg
 
 = Black Friday
 
@@ -27,15 +26,9 @@ On September 24th, 1869, the gold market collapses.
 
 For months, financiers Jay Gould and James Fisk have been buying gold in an attempt to corner the market. Their scheme depends on keeping the Treasury from releasing its reserves. To help with this, they cultivated Abel Corbin, a New York speculator who married Virginia Grant, the President's sister.
 
-Now Washington is asking the obvious question: how much did Grant know?
-
-When Treasury Secretary George Boutwell releases $4 million in gold, prices collapse within minutes. Speculators who bought on credit are ruined. Merchants are caught in the panic and farmers across the Midwest and South face heavier debts.
-
-The Gold Room on Broad Street descends into chaos as traders scramble to escape their losses.
+When Treasury Secretary George Boutwell releases $4 million in gold forcing prices to collapse within minute. The Gold Room on Broad Street descends into chaos as traders scramble to escape their losses.
 
 Grant was in Pennsylvania when the crash began. He has returned to Washington furious, insisting that he knew nothing of the scheme. Corbin's involvement has made that claim harder to defend.
-
-The financial crisis is already underway. Now the scandal is spreading to the White House.
 
 - @treasury_intervention: Support Treasury intervention to stabilize the gold market.
 - @demand_resignation: Demand Corbin's removal from government affairs.
@@ -44,7 +37,7 @@ The financial crisis is already underway. Now the scandal is spreading to the Wh
 
 @treasury_intervention
 on-arrival: {!
-    // Boutwell's gold release already happened — we endorse and expand it
+    // Boutwell's gold release already happened we endorse and expand it
     Q.economic_growth += 0.4;
     Q.inflation -= 0.4;
     Q.budget -= 1;
@@ -98,7 +91,7 @@ on-arrival: {!
     Q.middle_class_dem += 3;  // middle class doesn't believe us
     Q.rural_dem += 2;
 
-    // Betting on Grant's innocence — if investigation clears him, pays off
+    // Betting on Grant's innocence if investigation clears him, pays off
     Q.protect_grant_chosen = 1;
 !}
 go-to: investigate_question

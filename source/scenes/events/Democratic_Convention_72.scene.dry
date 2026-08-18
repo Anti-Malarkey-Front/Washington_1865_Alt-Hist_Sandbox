@@ -3,12 +3,13 @@ subtitle: Who will the Democrats nominate?
 tags: event
 view-if: year = 1872 and month = 7
 max-visits: 1
+face-image: img/960px-1872_Democratic_National_Convention_-_Maryland_(cropped).jpg
 
 = Democratic National Convention, 1872
 
-The <span style="color: #0015bc;">Democratic Party</span> gathers in Baltimore, divided and badly out of power. Four years of Republican rule have left the party searching for a way back.
+The <span style="color: #0015bc;">**Democratic Party**</span> gathers in Baltimore, divided and badly out of power. Four years of Republican rule have left the party searching for a way back.
 
-[? if liberal_split = 1 : Two strategies have emerged. One faction wants to nominate a <span style="color: #0015bc;">Democrat</span> and rebuild the party on its own terms. The other, led by figures such as August Belmont, wants to support the <span style="color: #DAA520;">Liberal Republican</span> ticket of Horace Greeley and B. Gratz Brown. Greeley has spent much of his career attacking the <span style="color: #0015bc;">Democrats</span>, but he has one advantage: he is running against [+ Candidate +]. ?]
+[? if liberal_split = 1 : Two strategies have emerged. One faction wants to nominate a <span style="color: #0015bc;">**Democrat**</span> and rebuild the party on its own terms. The other, led by figures such as August Belmont, wants to support the <span style="color: #DAA520;">**Liberal Republican**</span> ticket of Horace Greeley and B. Gratz Brown. Greeley has spent much of his career attacking the <span style="color: #0015bc;">**Democrats**</span>, but he has one advantage: he is running against [+ Candidate +]. ?]
 
 [? if liberal_split = 0 : The party must choose its own standard-bearer. The <span style="color: #0015bc;">**Democrats**</span> must stand on their own. ?]
 
@@ -72,7 +73,6 @@ if (Q.liberal_split === 1) {
     }
 
 } else {
-    // No liberal split — Dems must run their own candidate
     Q.greeley_fusion = 0;
     Q.dem_independent_1872 = 1;
 }
@@ -94,7 +94,7 @@ if (Q.dem_independent_1872 === 1) {
     // Thurman: mild reform credentials, the "Old Roman" of honest government
     weights["Thurman"] += reformFloor * 0.3;
 
-    // Bayard: the Bourbons' truest favorite — hard money, conservative, Southern-aligned
+    // Bayard: the Bourbons' truest favorite, hard money, conservative, Southern-aligned
     weights["Bayard"] += bourbonFloor * 0.4;
 
     // Pendleton: the reform/soft-money populist wing's pick
@@ -208,20 +208,22 @@ go-to: dem_convention_end
 
 @dem_convention_end
 
-= The Democrats Have Chosen
+= The <span style="color: #0015bc;">**Democrats**</span> Have Chosen
 
-[? if greeley_fusion = 1 : After bitter debate, the convention endorses the <span style="color: #DAA520;">Liberal Republican</span> ticket. Horace Greeley and B. Gratz Brown will now carry the <span style="color: #0015bc;">Democratic</span> nomination alongside the <span style="color: #DAA520;">Liberal Republican</span> one. Some delegates object loudly, while several Southern delegates leave the convention. The chairman describes the arrangement as a "coalition of necessity." ?]
+[? if greeley_fusion = 1 : <div class="face-figure"><img src="img/portraits/500px-Horace_Greeley_restored.jpg" alt="Horace Greeley" class="face-img"></div> ?][? if dem_candidate_1872 = "Hancock" : <div class="face-figure"><img src="img/portraits/Gen._Winfield_S._Hancock_-_NARA_-_529369_(cropped,_retouched).jpg" alt="Winfield Hancock" class="face-img"></div> ?][? if dem_candidate_1872 = "Thurman" : <div class="face-figure"><img src="img/portraits/Allen_G._Thurman_-_Brady-Handy.jpg" alt="Allen Thurman" class="face-img"></div> ?][? if dem_candidate_1872 = "Bayard" : <div class="face-figure"><img src="img/portraits/960px-Thomas_F._Bayard,_Brady-Handy_photo_portrait,_circa_1870-1880_(cropped)(b).jpg" alt="Thomas Bayard" class="face-img"></div> ?][? if dem_candidate_1872 = "Pendleton" : <div class="face-figure"><img src="img/portraits/250px-GeorgeHPendleton.png" alt="George Pendleton" class="face-img"></div> ?]
 
-[? if greeley_fusion = 0 : The old guard prevails. The convention rejects fusion and nominates its own ticket: [+ dem_candidate_1872 +] for President and [+ dem_vp_candidate_1872 +] for Vice President. ?]
+[? if greeley_fusion = 1 : After bitter debate, the convention endorses the <span style="color: #DAA520;">**Liberal Republican**</span> ticket. Horace Greeley and B. Gratz Brown will now carry the <span style="color: #0015bc;">**Democratic**</span> nomination alongside the <span style="color: #DAA520;">**Liberal Republican**</span> one. Some delegates object loudly, while several Southern delegates leave the convention. The chairman describes the arrangement as a "coalition of necessity." ?]
 
-[? if dem_candidate_1872 = "Hancock" : General Hancock is seen as the <span style="color: #0015bc;">Democrats'</span> strongest candidate. The <span style="color: #c00000;">Republicans</span> will have to take the race seriously. ?]
+[? if greeley_fusion = 0 : The old guard prevails. The convention nominates its own ticket: [+ dem_candidate_1872 +] for President and [+ dem_vp_candidate_1872 +] for Vice President. ?]
+
+[? if dem_candidate_1872 = "Hancock" : General Hancock is seen as the <span style="color: #0015bc;">**Democrats'**</span> strongest candidate. The <span style="color: #c00000;">**Republicans**</span> will have to take the race seriously. ?]
 
 [? if dem_candidate_1872 = "Thurman" : The "Old Roman" is a dependable choice. Ohio, once safely Republican, becomes a genuine battleground. ?]
 
-[? if dem_candidate_1872 = "Bayard" : Bayard offers a clear conservative alternative to the <span style="color: #c00000;">Republicans</span>, though his hard-money views may cost him support among working-class voters. ?]
+[? if dem_candidate_1872 = "Bayard" : Bayard offers a clear conservative alternative to the <span style="color: #c00000;">**Republicans**</span>, though his hard-money views may cost him support among working-class voters. ?]
 
 [? if dem_candidate_1872 = "Pendleton" : Pendleton's financial platform appeals to workers and farmers but leaves little room for cooperation with the reformers. ?]
 
-[? if greeley_fusion = 0 and liberal_split = 1 : The opposition to [+ Candidate +] is now divided between two tickets. The <span style="color: #c00000;">Republicans</span> are the immediate beneficiaries. ?]
+[? if greeley_fusion = 0 and liberal_split = 1 : The opposition to [+ Candidate +] is now divided between two tickets. The <span style="color: #c00000;">**Republicans**</span> are the immediate beneficiaries. ?]
 
-[? if greeley_fusion = 1 : The <span style="color: #0015bc;">Democrats</span> and <span style="color: #DAA520;">Liberal Republicans</span> now have to campaign together despite years of hostility between them. ?]
+[? if greeley_fusion = 1 : The <span style="color: #0015bc;">**Democrats**</span> and <span style="color: #DAA520;">**Liberal Republicans**</span> now have to campaign together despite years of hostility between them. ?]

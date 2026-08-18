@@ -19,8 +19,7 @@ Q.disputedDemEV = 0;
 
 Q.disputed_states_1876 = [];
 
-// Southern states use the corrected AR code for Arkansas (Q.southern_states currently
-// stores "AK" for Arkansas, a bug - this scene uses its own corrected list instead).
+// Southern states use the corrected AR code for Arkansas
 let southernCodes = ["VA", "NC", "SC", "GA", "AL", "FL", "MS", "AR", "TX", "LA"];
 
 let closeStates = {
@@ -57,13 +56,21 @@ let baselineDem = 44;
 let nationalRepSwing = (Q.workers_rep + Q.middle_class_rep + Q.rural_rep + Q.freemen_rep + Q.immigrant_laborers_rep + Q.unemployed_rep) / 6 - baselineRep;
 let nationalDemSwing = (Q.workers_dem + Q.middle_class_dem + Q.rural_dem + Q.freemen_dem + Q.immigrant_laborers_dem + Q.unemployed_dem) / 6 - baselineDem;
 
+let candidateNorthShift = {
+  "Tilden":    -3.5,
+  "Hendricks": -1.5,
+  "Bayard":     1.0,
+  "Hancock":    0,
+  "Allen":     -1.0
+}[Q.dem_candidate_1876] || 0;
+
 for (let state of Q.states) {
   let votes = { rep: 0, dem: 0 };
   let isSouthern = southernCodes.includes(state);
 
   let planThreshold = Q.Radical_plan ? 50 : (Q.Moderate_plan ? 35 : 20);
   let stateScore = Q[state + "_reconstructionScore"] || 0;
-  let badReconstruction = isSouthern && (stateScore < planThreshold * 0.6 || ((Q.kkk_strength || 0) + (Q.whiteL_strength || 0)) >= 400);
+  let badReconstruction = isSouthern && (stateScore < planThreshold * 0.6 || ((Q.kkk_strength || 0) + (Q.whiteL_strength || 0)) >= 300);
 
   for (let cls of Q.classes) {
     if (cls === "freemen" && Q.fifthteen == 0) continue;
@@ -100,7 +107,7 @@ for (let state of Q.states) {
   }
 
   if (!isSouthern && closeStates[state] !== undefined) {
-    let nudge = closeStates[state] * 0.1;
+    let nudge = closeStates[state] * 0.1 + candidateNorthShift;
     let randomJitter = (Math.random() * 0.8) - 0.4;
     let marginTarget = nudge + randomJitter;
 
@@ -121,8 +128,11 @@ for (let state of Q.states) {
     let twoPartyTotal = votes.rep + votes.dem;
     if (twoPartyTotal > 0) {
       let currentMargin = ((votes.rep - votes.dem) / twoPartyTotal) * 100;
-      let fraudPower = Math.min(25, ((Q.kkk_strength || 0) + (Q.whiteL_strength || 0)) / 40);
-      let fraudShift = fraudPower + (Math.random() * 6) - 3;
+      
+      // FIXED: Make fraud much stronger to match historical violence levels
+      // KKK+WhiteL of 500+ should reliably shift close races
+      let fraudPower = Math.min(35, ((Q.kkk_strength || 0) + (Q.whiteL_strength || 0)) / 20);
+      let fraudShift = fraudPower + (Math.random() * 10) - 5;
 
       votes.rep -= twoPartyTotal * (fraudShift / 200);
       votes.dem += twoPartyTotal * (fraudShift / 200);
@@ -130,9 +140,23 @@ for (let state of Q.states) {
       votes.dem = Math.max(0, votes.dem);
 
       let postFraudMargin = ((votes.rep - votes.dem) / twoPartyTotal) * 100;
-      if (Math.abs(postFraudMargin) <= 6) {
+      
+      // FIXED: Widen dispute window from 9 to 14 percentage points
+      // This makes disputes actually achievable with your -6 to +6 natural variation
+      if (Math.abs(postFraudMargin) <= 14) {
         stateDisputed = 1;
         Q.disputed_states_1876.push(state);
+      }
+      
+      // FIXED: Add secondary uncertainty mechanism for extreme violence
+      // High violence creates ambiguous returns independent of margin
+      if ((Q.kkk_strength || 0) + (Q.whiteL_strength || 0) >= 400) {
+        if (Math.random() < 0.5) {  // 50% chance of disputed returns with extreme violence
+          stateDisputed = 1;
+          if (!Q.disputed_states_1876.includes(state)) {
+            Q.disputed_states_1876.push(state);
+          }
+        }
       }
     }
   }
@@ -168,6 +192,11 @@ let majority = Math.floor(totalEV / 2) + 1;
 let repUndisputed = Q.repEVTotal - Q.disputedRepEV;
 let demUndisputed = Q.demEVTotal - Q.disputedDemEV;
 
+if (Q.disputed_states_1876.length > 0)
+{
+  Q.Disputed_Yes = 1;
+}
+
 if (Q.disputed_states_1876.length > 0 && repUndisputed < majority && demUndisputed < majority) {
   Q.potus_winner = "disputed";
 } else if (Q.repEVTotal >= majority) {
@@ -175,6 +204,12 @@ if (Q.disputed_states_1876.length > 0 && repUndisputed < majority && demUndisput
 } else {
   Q.potus_winner = "dem";
 }
+
+if(Q.demEVTotal == 0 && Q.libEVTotal == 0)
+{
+  this.achieve("washington");
+}
+
 !}
 on-display: {!
   var winners = {
@@ -253,7 +288,12 @@ go-to: potus_menu_1876
 {!<tr><td>Party</td><td>Electoral votes</td></tr>!}
 {!<tr><td><div class="box" style="background-color:#d73027; outline:2px solid;"></div> !}<span style="color: #c00000;">**Republicans ([+ Candidate +])**</span>{!</td><td>!}[+ repEVTotal +] votes{!</td></tr>!}
 {!<tr><td><div class="box" style="background-color:#4575b4; outline:2px solid;"></div> !}<span style="color: #0015bc;">**Democrats**</span> ([+ dem_candidate_1876 +]){!</td><td>!}[+ demEVTotal +] votes{!</td></tr>!}
+[? if Disputed_Yes == 1 : {!<tr><td><div class="box" style="background-color:#4575b4; outline:2px solid;"></div> !}<span style="color: #8E536E;">**Disputed Results**</span> {!</td><td>!}[+ disputedRepEV + disputedDemEV +] votes{!</td></tr>!} ?]
 {!</table>!}
+
+[? if Disputed_Yes == 1 : The following number is the amount of disputed electoral votes produced from the election:  [+ disputedRepEV + disputedDemEV +] electoral votes ?]
+
+[? if potus_winner != "disputed" and Disputed_Yes == 1 : But fortunately, the disputed states didn't matter in resulting in the winner of the election. ?]
 
 @potus_menu_1876
 
@@ -268,6 +308,118 @@ view-if: potus_winner = "rep"
 on-arrival: {!
     Q.president = Q.Candidate;
     Q.president_party = "rep";
+    if (Q.Candidate == "Grant") {
+      Q.sect_state = "Hamilton Fish";
+      Q.sect_state_party = "R";
+      Q.sect_treasury = "William A. Richardson";
+      Q.sect_treasury_party = "R";
+      Q.sect_war = "William W. Belknap";
+      Q.sect_war_party = "R";
+      Q.sect_interior = "Columbus Delano";
+      Q.sect_interior_party = "R";
+      Q.sect_postmaster = "John A. J. Creswell";
+      Q.sect_postmaster_party = "R";
+      Q.attorney_general = "George H. Williams";
+      Q.attorney_general_party = "R";
+      Q.sect_agriculture = "Horace Capron";
+      Q.sect_agriculture_party = "R";
+    }
+    if (Q.Candidate == "Wade") {
+        Q.sect_state = "Charles Sumner";
+        Q.sect_state_party = "R";
+        Q.sect_treasury = "Henry C. Carey";
+        Q.sect_treasury_party = "R";
+        Q.sect_war = "Benjamin F. Butler";
+        Q.sect_war_party = "R";
+        Q.sect_interior = "Zachariah Chandler";
+        Q.sect_interior_party = "R";
+        Q.sect_postmaster = "Oliver P. Morton";
+        Q.sect_postmaster_party = "R";
+        Q.attorney_general = "George S. Boutwell";
+        Q.attorney_general_party = "R";
+        Q.sect_agriculture = "Isaac Newton";
+        Q.sect_agriculture_party = "R";
+    }
+    if (Q.Candidate == "Chase") {
+        Q.sect_state = "William H. Seward";
+        Q.sect_state_party = "R";
+        Q.sect_treasury = "John Sherman";
+        Q.sect_treasury_party = "R";
+        Q.sect_war = "John A. Dix";
+        Q.sect_war_party = "R";
+        Q.sect_interior = "Jacob D. Cox";
+        Q.sect_interior_party = "R";
+        Q.sect_postmaster = "Marshall Jewell";
+        Q.sect_postmaster_party = "R";
+        Q.attorney_general = "Benjamin H. Brewster";
+        Q.attorney_general_party = "R";
+        Q.sect_agriculture = "Horace Capron";
+        Q.sect_agriculture_party = "R";
+    }
+    if (Q.Candidate == "Conkling") {
+        Q.sect_state = "Hamilton Fish";
+        Q.sect_state_party = "R";
+        Q.sect_treasury = "Levi P. Morton";
+        Q.sect_treasury_party = "R";
+        Q.sect_war = "William W. Belknap";
+        Q.sect_war_party = "R";
+        Q.sect_interior = "Zachariah Chandler";
+        Q.sect_interior_party = "R";
+        Q.sect_postmaster = "Chester A. Arthur";
+        Q.sect_postmaster_party = "R";
+        Q.attorney_general = "George H. Williams";
+        Q.attorney_general_party = "R";
+        Q.sect_agriculture = "Horace Capron";
+        Q.sect_agriculture_party = "R";
+    }
+    if (Q.Candidate == "Blaine") {
+        Q.sect_state = "James F. Wilson";
+        Q.sect_state_party = "R";
+        Q.sect_treasury = "John Sherman";
+        Q.sect_treasury_party = "R";
+        Q.sect_war = "William T. Sherman";
+        Q.sect_war_party = "R";
+        Q.sect_interior = "Jacob D. Cox";
+        Q.sect_interior_party = "R";
+        Q.sect_postmaster = "Marshall Jewell";
+        Q.sect_postmaster_party = "R";
+        Q.attorney_general = "George H. Williams";
+        Q.attorney_general_party = "R";
+        Q.sect_agriculture = "Horace Capron";
+        Q.sect_agriculture_party = "R";
+    }
+    if (Q.Candidate == "Morton") {
+        Q.sect_state = "James G. Blaine";
+        Q.sect_state_party = "R";
+        Q.sect_treasury = "Benjamin H. Bristow";
+        Q.sect_treasury_party = "R";
+        Q.sect_war = "Benjamin F. Butler";
+        Q.sect_war_party = "R";
+        Q.sect_interior = "Zachariah Chandler";
+        Q.sect_interior_party = "R";
+        Q.sect_postmaster = "Marshall Jewell";
+        Q.sect_postmaster_party = "R";
+        Q.attorney_general = "Edwards Pierrepont";
+        Q.attorney_general_party = "R";
+        Q.sect_agriculture = "Horace Capron";
+        Q.sect_agriculture_party = "R";
+    }
+    if (Q.Candidate == "Hayes") {
+        Q.sect_state = "William M. Evarts";
+        Q.sect_state_party = "R";
+        Q.sect_treasury = "John Sherman";
+        Q.sect_treasury_party = "R";
+        Q.sect_war = "George W. McCrary";
+        Q.sect_war_party = "R";
+        Q.sect_interior = "Carl Schurz";
+        Q.sect_interior_party = "R";
+        Q.sect_postmaster = "George H. Williams";
+        Q.sect_postmaster_party = "R";
+        Q.attorney_general = "Charles Devens";
+        Q.attorney_general_party = "R";
+        Q.sect_agriculture = "William G. Le Duc";
+        Q.sect_agriculture_party = "R";
+    }
 !}
 
 The <span style="color: #c00000;">**Republicans**</span> have carried a clear majority. [+ Candidate +] will be the next President of the United States, with no dispute over the outcome.
@@ -281,6 +433,87 @@ view-if: potus_winner = "dem"
 on-arrival: {!
     Q.president = Q.dem_candidate_1876;
     Q.president_party = "dem";
+    Q.lose_vote = 1;
+    if (Q.Candidate == "Tilden") {
+        Q.sect_state = "Thomas F. Bayard";
+        Q.sect_state_party = "D";
+        Q.sect_treasury = "John G. Carlisle";
+        Q.sect_treasury_party = "D";
+        Q.sect_war = "William B. Franklin";
+        Q.sect_war_party = "D";
+        Q.sect_interior = "Carl Schurz";
+        Q.sect_interior_party = "R";
+        Q.sect_postmaster = "Samuel J. Randall";
+        Q.sect_postmaster_party = "D";
+        Q.attorney_general = "Richard T. Merrick";
+        Q.attorney_general_party = "D";
+        Q.sect_agriculture = "William Le Duc";
+        Q.sect_agriculture_party = "R";
+    }
+    if (Q.Candidate == "Bayard") {
+        Q.sect_state = "Thomas Ewing Jr.";
+        Q.sect_state_party = "D";
+        Q.sect_treasury = "John G. Carlisle";
+        Q.sect_treasury_party = "D";
+        Q.sect_war = "George B. McClellan";
+        Q.sect_war_party = "D";
+        Q.sect_interior = "William L. Scott";
+        Q.sect_interior_party = "D";
+        Q.sect_postmaster = "Samuel J. Randall";
+        Q.sect_postmaster_party = "D";
+        Q.attorney_general = "Jeremiah S. Black";
+        Q.attorney_general_party = "D";
+        Q.sect_agriculture = "George W. McCrary";
+        Q.sect_agriculture_party = "R";
+    }
+    if (Q.Candidate == "Hancock") {
+        Q.sect_state = "Thomas F. Bayard";
+        Q.sect_state_party = "D";
+        Q.sect_treasury = "William B. Allison";
+        Q.sect_treasury_party = "R";
+        Q.sect_war = "William T. Sherman";
+        Q.sect_war_party = "R";
+        Q.sect_interior = "Daniel W. Voorhees";
+        Q.sect_interior_party = "D";
+        Q.sect_postmaster = "Samuel J. Randall";
+        Q.sect_postmaster_party = "D";
+        Q.attorney_general = "Jeremiah S. Black";
+        Q.attorney_general_party = "D";
+        Q.sect_agriculture = "Horace Capron";
+        Q.sect_agriculture_party = "R";
+    }
+    if (Q.Candidate == "Hendricks") {
+        Q.sect_state = "Thomas F. Bayard";
+        Q.sect_state_party = "D";
+        Q.sect_treasury = "John G. Carlisle";
+        Q.sect_treasury_party = "D";
+        Q.sect_war = "George W. McClellan";
+        Q.sect_war_party = "D";
+        Q.sect_interior = "Daniel W. Voorhees";
+        Q.sect_interior_party = "D";
+        Q.sect_postmaster = "Samuel J. Randall";
+        Q.sect_postmaster_party = "D";
+        Q.attorney_general = "Jeremiah S. Black";
+        Q.attorney_general_party = "D";
+        Q.sect_agriculture = "William B. Franklin";
+        Q.sect_agriculture_party = "D";
+    }
+    if (Q.Candidate == "Allen") {
+        Q.sect_state = "George W. Julian";
+        Q.sect_state_party = "D";
+        Q.sect_treasury = "Peter Cooper";
+        Q.sect_treasury_party = "GB";
+        Q.sect_war = "George W. McClellan";
+        Q.sect_war_party = "D";
+        Q.sect_interior = "William M. Springer";
+        Q.sect_interior_party = "D";
+        Q.sect_postmaster = "Samuel S. Cox";
+        Q.sect_postmaster_party = "D";
+        Q.attorney_general = "David Dudley Field";
+        Q.attorney_general_party = "D";
+        Q.sect_agriculture = "William A. Wallace";
+        Q.sect_agriculture_party = "GB";
+    }
 !}
 
 [+ dem_candidate_1876 +] and the <span style="color: #0015bc;">**Democratic Party**</span> have carried a clear majority of the electoral vote. For the first time since before the war, a <span style="color: #0015bc;">**Democrat**</span> will occupy the White House. The Redemption of the South, already well underway in statehouses across the region, now has a friend in Washington.
@@ -300,7 +533,7 @@ How does the administration proceed?
 
 - @fight_for_electors: Have Congress certify the results in favor of [+ Candidate +]
 - @concede_disputed: Concede the disputed states to the Democrats
-- @broker_compromise: Leave the decision to an Bipartisan Commission of Congress
+- @broker_compromise: Leave the decision to a Bipartisan Commission of Congress
 
 @fight_for_electors
 choose-if: rep_majority = 1
@@ -315,17 +548,209 @@ on-arrival: {!
     Q.radical_strength += 3;
     Q.dem_relation -= 10;
     Q.March_DC = 1;
+    if (Q.Candidate == "Grant") {
+      Q.sect_state = "Hamilton Fish";
+      Q.sect_state_party = "R";
+      Q.sect_treasury = "William A. Richardson";
+      Q.sect_treasury_party = "R";
+      Q.sect_war = "William W. Belknap";
+      Q.sect_war_party = "R";
+      Q.sect_interior = "Columbus Delano";
+      Q.sect_interior_party = "R";
+      Q.sect_postmaster = "John A. J. Creswell";
+      Q.sect_postmaster_party = "R";
+      Q.attorney_general = "George H. Williams";
+      Q.attorney_general_party = "R";
+      Q.sect_agriculture = "Horace Capron";
+      Q.sect_agriculture_party = "R";
+    }
+    if (Q.Candidate == "Wade") {
+        Q.sect_state = "Charles Sumner";
+        Q.sect_state_party = "R";
+        Q.sect_treasury = "Henry C. Carey";
+        Q.sect_treasury_party = "R";
+        Q.sect_war = "Benjamin F. Butler";
+        Q.sect_war_party = "R";
+        Q.sect_interior = "Zachariah Chandler";
+        Q.sect_interior_party = "R";
+        Q.sect_postmaster = "Oliver P. Morton";
+        Q.sect_postmaster_party = "R";
+        Q.attorney_general = "George S. Boutwell";
+        Q.attorney_general_party = "R";
+        Q.sect_agriculture = "Isaac Newton";
+        Q.sect_agriculture_party = "R";
+    }
+    if (Q.Candidate == "Chase") {
+        Q.sect_state = "William H. Seward";
+        Q.sect_state_party = "R";
+        Q.sect_treasury = "John Sherman";
+        Q.sect_treasury_party = "R";
+        Q.sect_war = "John A. Dix";
+        Q.sect_war_party = "R";
+        Q.sect_interior = "Jacob D. Cox";
+        Q.sect_interior_party = "R";
+        Q.sect_postmaster = "Marshall Jewell";
+        Q.sect_postmaster_party = "R";
+        Q.attorney_general = "Benjamin H. Brewster";
+        Q.attorney_general_party = "R";
+        Q.sect_agriculture = "Horace Capron";
+        Q.sect_agriculture_party = "R";
+    }
+    if (Q.Candidate == "Conkling") {
+        Q.sect_state = "Hamilton Fish";
+        Q.sect_state_party = "R";
+        Q.sect_treasury = "Levi P. Morton";
+        Q.sect_treasury_party = "R";
+        Q.sect_war = "William W. Belknap";
+        Q.sect_war_party = "R";
+        Q.sect_interior = "Zachariah Chandler";
+        Q.sect_interior_party = "R";
+        Q.sect_postmaster = "Chester A. Arthur";
+        Q.sect_postmaster_party = "R";
+        Q.attorney_general = "George H. Williams";
+        Q.attorney_general_party = "R";
+        Q.sect_agriculture = "Horace Capron";
+        Q.sect_agriculture_party = "R";
+    }
+    if (Q.Candidate == "Blaine") {
+        Q.sect_state = "James F. Wilson";
+        Q.sect_state_party = "R";
+        Q.sect_treasury = "John Sherman";
+        Q.sect_treasury_party = "R";
+        Q.sect_war = "William T. Sherman";
+        Q.sect_war_party = "R";
+        Q.sect_interior = "Jacob D. Cox";
+        Q.sect_interior_party = "R";
+        Q.sect_postmaster = "Marshall Jewell";
+        Q.sect_postmaster_party = "R";
+        Q.attorney_general = "George H. Williams";
+        Q.attorney_general_party = "R";
+        Q.sect_agriculture = "Horace Capron";
+        Q.sect_agriculture_party = "R";
+    }
+    if (Q.Candidate == "Morton") {
+        Q.sect_state = "James G. Blaine";
+        Q.sect_state_party = "R";
+        Q.sect_treasury = "Benjamin H. Bristow";
+        Q.sect_treasury_party = "R";
+        Q.sect_war = "Benjamin F. Butler";
+        Q.sect_war_party = "R";
+        Q.sect_interior = "Zachariah Chandler";
+        Q.sect_interior_party = "R";
+        Q.sect_postmaster = "Marshall Jewell";
+        Q.sect_postmaster_party = "R";
+        Q.attorney_general = "Edwards Pierrepont";
+        Q.attorney_general_party = "R";
+        Q.sect_agriculture = "Horace Capron";
+        Q.sect_agriculture_party = "R";
+    }
+    if (Q.Candidate == "Hayes") {
+        Q.sect_state = "William M. Evarts";
+        Q.sect_state_party = "R";
+        Q.sect_treasury = "John Sherman";
+        Q.sect_treasury_party = "R";
+        Q.sect_war = "George W. McCrary";
+        Q.sect_war_party = "R";
+        Q.sect_interior = "Carl Schurz";
+        Q.sect_interior_party = "R";
+        Q.sect_postmaster = "George H. Williams";
+        Q.sect_postmaster_party = "R";
+        Q.attorney_general = "Charles Devens";
+        Q.attorney_general_party = "R";
+        Q.sect_agriculture = "William G. Le Duc";
+        Q.sect_agriculture_party = "R";
+    }
 !}
 
-The Republicans congressman offically certify the electoral votes allowing [+ Candidate +] to be offically declared President of the United States.
+The Republicans in Congress officially certify the electoral votes, allowing [+ Candidate +] to be declared President of the United States. The decision inflames Democratic members and Northern newspapers, but a majority holds. For now, constitutional order prevails, even if barely.
 
 @concede_disputed
 on-arrival: {!
     Q.president = Q.dem_candidate_1876;
     Q.president_party = "dem";
     Q.potus_winner = "dem";
-    Q.compromise_1877 = 0;
     Q.dem_relation += 8;
+    Q.lose_vote = 1;
+    if (Q.Candidate == "Tilden") {
+        Q.sect_state = "Thomas F. Bayard";
+        Q.sect_state_party = "D";
+        Q.sect_treasury = "John G. Carlisle";
+        Q.sect_treasury_party = "D";
+        Q.sect_war = "William B. Franklin";
+        Q.sect_war_party = "D";
+        Q.sect_interior = "Carl Schurz";
+        Q.sect_interior_party = "R";
+        Q.sect_postmaster = "Samuel J. Randall";
+        Q.sect_postmaster_party = "D";
+        Q.attorney_general = "Richard T. Merrick";
+        Q.attorney_general_party = "D";
+        Q.sect_agriculture = "William Le Duc";
+        Q.sect_agriculture_party = "R";
+    }
+    if (Q.Candidate == "Bayard") {
+        Q.sect_state = "Thomas Ewing Jr.";
+        Q.sect_state_party = "D";
+        Q.sect_treasury = "John G. Carlisle";
+        Q.sect_treasury_party = "D";
+        Q.sect_war = "George B. McClellan";
+        Q.sect_war_party = "D";
+        Q.sect_interior = "William L. Scott";
+        Q.sect_interior_party = "D";
+        Q.sect_postmaster = "Samuel J. Randall";
+        Q.sect_postmaster_party = "D";
+        Q.attorney_general = "Jeremiah S. Black";
+        Q.attorney_general_party = "D";
+        Q.sect_agriculture = "George W. McCrary";
+        Q.sect_agriculture_party = "R";
+    }
+    if (Q.Candidate == "Hancock") {
+        Q.sect_state = "Thomas F. Bayard";
+        Q.sect_state_party = "D";
+        Q.sect_treasury = "William B. Allison";
+        Q.sect_treasury_party = "R";
+        Q.sect_war = "William T. Sherman";
+        Q.sect_war_party = "R";
+        Q.sect_interior = "Daniel W. Voorhees";
+        Q.sect_interior_party = "D";
+        Q.sect_postmaster = "Samuel J. Randall";
+        Q.sect_postmaster_party = "D";
+        Q.attorney_general = "Jeremiah S. Black";
+        Q.attorney_general_party = "D";
+        Q.sect_agriculture = "Horace Capron";
+        Q.sect_agriculture_party = "R";
+    }
+    if (Q.Candidate == "Hendricks") {
+        Q.sect_state = "Thomas F. Bayard";
+        Q.sect_state_party = "D";
+        Q.sect_treasury = "John G. Carlisle";
+        Q.sect_treasury_party = "D";
+        Q.sect_war = "George W. McClellan";
+        Q.sect_war_party = "D";
+        Q.sect_interior = "Daniel W. Voorhees";
+        Q.sect_interior_party = "D";
+        Q.sect_postmaster = "Samuel J. Randall";
+        Q.sect_postmaster_party = "D";
+        Q.attorney_general = "Jeremiah S. Black";
+        Q.attorney_general_party = "D";
+        Q.sect_agriculture = "William B. Franklin";
+        Q.sect_agriculture_party = "D";
+    }
+    if (Q.Candidate == "Allen") {
+        Q.sect_state = "George W. Julian";
+        Q.sect_state_party = "D";
+        Q.sect_treasury = "Peter Cooper";
+        Q.sect_treasury_party = "GB";
+        Q.sect_war = "George W. McClellan";
+        Q.sect_war_party = "D";
+        Q.sect_interior = "William M. Springer";
+        Q.sect_interior_party = "D";
+        Q.sect_postmaster = "Samuel S. Cox";
+        Q.sect_postmaster_party = "D";
+        Q.attorney_general = "David Dudley Field";
+        Q.attorney_general_party = "D";
+        Q.sect_agriculture = "William A. Wallace";
+        Q.sect_agriculture_party = "GB";
+    }
 !}
 
 Rather than contest returning boards openly aligned with armed Redeemer organizations, the administration accepts the Democratic certifications. [+ dem_candidate_1876 +] will be the next President. It avoids a constitutional crisis, but it hands the <span style="color: #002765;">**Bourbon**</span> wing of the Democratic Party exactly the validation it wanted, in exactly the states where the ballot was least free.
