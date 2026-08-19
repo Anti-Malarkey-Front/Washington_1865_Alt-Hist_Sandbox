@@ -11,7 +11,6 @@ go-to: start_menu_2
 @start_menu_2
 
 - @start: Start game
-- @election_simulation: Election simulation
 - @credits: Credits
 - @game_over.achievements
 
@@ -1975,7 +1974,7 @@ Q.coalition_affairs_timer = 0;
 Q.emergency_cuts_timer = 0;
 Q.unemployment_insurance_timer = 0;
 Q.kkk_ban_timer = 0;
-Q.Disputed_Yes = 1;
+Q.Disputed_Yes = 0;
 Q.sh_ban_timer = 0;
 Q.kpd_ultimatum_timer = 0;
 Q.march_on_berlin_timer = 0;
