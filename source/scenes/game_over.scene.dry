@@ -239,7 +239,7 @@ view-if: ending = "Historical"
 title: Historical: Hayes, Hayes, we all love Hayes.
 tags: endings
 go-to: eg_menu
-audio: music/For Hayes and Wheeler Too!.mp3
+audio: music/For_Hayes_and_Wheeler_Too.mp3
 set-bg: img/The_political_farce_of_1876_LCCN2006677483.jpg
 
 = Historical Ending
@@ -330,7 +330,7 @@ White paramilitary organizations transitioned from illegal terrorists into semi-
 
 Over time, the Lost Cause became the organizing myth of the postwar South. Confederate leaders were rehabilitated as defenders of constitutional liberty, while Reconstruction itself was remembered not as an unfinished democratic experiment, but as a brief period of Northern domination that had threatened the natural order of Southern society. This interpretation was reinforced in schools, churches, and public commemorations, shaping generations of civic identity.
 
-Nationally, the North chose reconciliation over reconstruction. By the turn of the twentieth century, the United States had been politically reunited, but never socially reconstructed. The South remained governed by a rigid racial hierarchy that had emerged not from the collapse of Reconstruction, but from its absence. Freedom had been declared, but never fully built. <a href="https://www.youtube.com/playlist?list=PLwCiRao53J1y_gqJJOH6Rcgpb-vaW9wF0">Checkmate, Lincolnites!</a>
+Nationally, the North chose reconciliation over reconstruction. By the turn of the twentieth century, the United States had been politically reunited, but never socially reconstructed. The South remained governed by a rigid racial hierarchy that had emerged not from the collapse of Reconstruction, but from its absence. Freedom had been declared, but never fully built. <a href="https://www.youtube.com/playlist?list=PLwCiRao53J1y_gqJJOH6Rcgpb-vaW9wF0">Checkmate, Lincolnites! - Johnny Reb (1863 probably)</a>
 
 @achievements
 title: Achievements
@@ -887,6 +887,22 @@ go-to: eg_menu if started == 1; root.start_menu_2 if started == 0
 {!</tr>!}
 ?]
 
+[? if game_achievement_Secret_Hayes: 
+{!<tr class="achievement">!}
+    {!<td class="achievement-icon">!}
+        <img src="img/Achievements/Secret_Hayes.png" alt="Secret Hayes">
+    {!</td>!}
+    {!<td class="achievement-info">!}
+        <div class="achievement-title">
+            <span style="color: #FFD700; -webkit-text-stroke: 0.5px black; font-weight: bold;">Secret Hayes</span>
+        </div>
+        <div class="achievement-description">
+            Roll the 1 in 100 odds of getting the Secret Hayes image!
+        </div>
+    {!</td>!}
+{!</tr>!}
+?]
+
 {!</table>!}
 
 
@@ -1438,6 +1454,23 @@ go-to: eg_menu if started == 1; root.start_menu_2 if started == 0
     {!</td>!}
 {!</tr>!}
 ?]
+
+[? if achievement_Secret_Hayes: 
+{!<tr class="achievement">!}
+    {!<td class="achievement-icon">!}
+        <img src="img/Achievements/Secret_Hayes.png" alt="Secret Hayes">
+    {!</td>!}
+    {!<td class="achievement-info">!}
+        <div class="achievement-title">
+            <span style="color: #FFD700; -webkit-text-stroke: 0.5px black; font-weight: bold;">Secret Hayes</span>
+        </div>
+        <div class="achievement-description">
+            Roll the 1 in 100 odds of getting the Secret Hayes image!
+        </div>
+    {!</td>!}
+{!</tr>!}
+?]
+
 
 {!</table>!}
 

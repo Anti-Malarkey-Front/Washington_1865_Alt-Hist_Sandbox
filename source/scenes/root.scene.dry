@@ -59,7 +59,7 @@ Q.liberal_split_timer = 0;
 //Democrat Factions
 Q.dem_bourbon_strength = 60;
 Q.dem_bourbon_dissent = 5;
-Q.dem_reform_strength = 15;
+Q.dem_reform_strength = 30;
 Q.dem_reform_dissent = 10;
 
 Q.yea_r = 0;
@@ -1990,6 +1990,7 @@ Q.garfield_advisor = 0;
 Q.sherman_advisor = 0;
 Q.blaine_advisor = 0;
 Q.hayes_advisor = 0;
+Q.secret_hayes = 0;
 Q.fish_advisor = 0;
 Q.conkling_advisor = 0;
 Q.cameron_advisor = 0;
