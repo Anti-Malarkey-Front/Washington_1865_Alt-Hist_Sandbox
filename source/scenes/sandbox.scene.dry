@@ -974,7 +974,7 @@ Q.workers_rep += 20;
 Raised worker support for Republican.
 
 @republican_worker_down
-go-to: rep_support
+go-to: republican_support
 on-arrival: {!
 Q.workers_rep -= 20;
 !}
@@ -982,7 +982,7 @@ Q.workers_rep -= 20;
 Lowered worker support for Republican.
 
 @republican_middle_class_up
-go-to: rep_support
+go-to: republican_support
 on-arrival: {!
 Q.middle_class_rep += 20;
 !}
@@ -990,7 +990,7 @@ Q.middle_class_rep += 20;
 Raised Middle Class support for Republican.
 
 @republican_middle_class_down
-go-to: rep_support
+go-to: republican_support
 on-arrival: {!
 Q.middle_class_rep -= 20;
 !}
@@ -998,7 +998,7 @@ Q.middle_class_rep -= 20;
 Lowered Middle Class support for Republican.
 
 @republican_immigrant_laborers_up
-go-to: rep_support
+go-to: republican_support
 on-arrival: {!
 Q.immigrant_laborers_rep += 20;
 !}
@@ -1006,7 +1006,7 @@ Q.immigrant_laborers_rep += 20;
 Raised immigrant laborer support for Republican.
 
 @republican_immigrant_laborers_down
-go-to: rep_support
+go-to: republican_support
 on-arrival: {!
 Q.immigrant_laborers_rep -= 20;
 !}
@@ -1014,7 +1014,7 @@ Q.immigrant_laborers_rep -= 20;
 Lowered immigrant laborer support for Republican.
 
 @republican_rural_up
-go-to: rep_support
+go-to: republican_support
 on-arrival: {!
 Q.rural_rep += 20;
 !}
@@ -1022,7 +1022,7 @@ Q.rural_rep += 20;
 Raised Rural support for Republican.
 
 @republican_rural_down
-go-to: rep_support
+go-to: republican_support
 on-arrival: {!
 Q.rural_rep -= 20;
 !}
@@ -1030,7 +1030,7 @@ Q.rural_rep -= 20;
 Lowered Rural support for Republican.
 
 @republican_unemployed_up
-go-to: rep_support
+go-to: republican_support
 on-arrival: {!
 Q.unemployed_rep += 20;
 !}
@@ -1038,7 +1038,7 @@ Q.unemployed_rep += 20;
 Raised Unemployed support for Republican.
 
 @republican_unemployed_down
-go-to: rep_support
+go-to: republican_support
 on-arrival: {!
 Q.unemployed_rep -= 20;
 !}
@@ -1046,7 +1046,7 @@ Q.unemployed_rep -= 20;
 Lowered Unemployed support for Republican.
 
 @republican_freemen_up
-go-to: rep_support
+go-to: republican_support
 on-arrival: {!
 Q.freemen_rep += 20;
 !}
@@ -1054,7 +1054,7 @@ Q.freemen_rep += 20;
 Raised freemen support for Republican.
 
 @republican_freemen_down
-go-to: rep_support
+go-to: republican_support
 on-arrival: {!
 Q.freemen_rep -= 20;
 !}
@@ -1191,7 +1191,7 @@ Lowered freemen support for Liberal Republicans.
 - @returnpartysupport: Return To Party Support Menu
 
 @democrat_worker_up
-go-to: dem_support
+go-to: democrat_support
 on-arrival: {!
 Q.workers_dem += 20;
 !}
@@ -1199,7 +1199,7 @@ Q.workers_dem += 20;
 Raised worker support for Democrats.
 
 @democrat_worker_down
-go-to: dem_support
+go-to: democrat_support
 on-arrival: {!
 Q.workers_dem -= 20;
 !}
@@ -1207,7 +1207,7 @@ Q.workers_dem -= 20;
 Lowered worker support for Democrats.
 
 @democrat_middle_class_up
-go-to: dem_support
+go-to: democrat_support
 on-arrival: {!
 Q.middle_class_dem += 20;
 !}
@@ -1215,7 +1215,7 @@ Q.middle_class_dem += 20;
 Raised Middle Class support for Democrats.
 
 @democrat_middle_class_down
-go-to: dem_support
+go-to: democrat_support
 on-arrival: {!
 Q.middle_class_dem -= 20;
 !}
@@ -1223,7 +1223,7 @@ Q.middle_class_dem -= 20;
 Lowered Middle Class support for Democrats.
 
 @democrat_immigrant_laborers_up
-go-to: dem_support
+go-to: democrat_support
 on-arrival: {!
 Q.immigrant_laborers_dem += 20;
 !}
@@ -1231,7 +1231,7 @@ Q.immigrant_laborers_dem += 20;
 Raised immigrant laborer support for Democrats.
 
 @democrat_immigrant_laborers_down
-go-to: dem_support
+go-to: democrat_support
 on-arrival: {!
 Q.immigrant_laborers_dem -= 20;
 !}
@@ -1239,7 +1239,7 @@ Q.immigrant_laborers_dem -= 20;
 Lowered immigrant laborer support for Democrats.
 
 @democrat_rural_up
-go-to: dem_support
+go-to: democrat_support
 on-arrival: {!
 Q.rural_dem += 20;
 !}
@@ -1247,7 +1247,7 @@ Q.rural_dem += 20;
 Raised Rural support for Democrats.
 
 @democrat_rural_down
-go-to: dem_support
+go-to: democrat_support
 on-arrival: {!
 Q.rural_dem -= 20;
 !}
@@ -1255,7 +1255,7 @@ Q.rural_dem -= 20;
 Lowered Rural support for Democrats.
 
 @democrat_unemployed_up
-go-to: dem_support
+go-to: democrat_support
 on-arrival: {!
 Q.unemployed_dem += 20;
 !}
@@ -1263,7 +1263,7 @@ Q.unemployed_dem += 20;
 Raised Unemployed support for Democrats.
 
 @democrat_unemployed_down
-go-to: dem_support
+go-to: democrat_support
 on-arrival: {!
 Q.unemployed_dem -= 20;
 !}
@@ -1271,7 +1271,7 @@ Q.unemployed_dem -= 20;
 Lowered Unemployed support for Democrats.
 
 @democrat_freemen_up
-go-to: dem_support
+go-to: democrat_support
 on-arrival: {!
 Q.freemen_dem += 20;
 !}
@@ -1279,7 +1279,7 @@ Q.freemen_dem += 20;
 Raised freemen support for Democrats.
 
 @democrat_freemen_down
-go-to: dem_support
+go-to: democrat_support
 on-arrival: {!
 Q.freemen_dem -= 20;
 !}
