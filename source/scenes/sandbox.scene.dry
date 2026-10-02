@@ -840,77 +840,77 @@ go-to: editpartysupport
 on-arrival: {!
 Q.workers_rep += 10;
 Q.middle_class_rep += 10;
-Q.immigrant_laborers_spd += 10;
-Q.rural_spd += 10;
-Q.unemployed_spd += 10;
-Q.catholics_spd += 10;
+Q.immigrant_laborers_rep += 10;
+Q.rural_rep += 10;
+Q.unemployed_rep += 10;
+Q.freemen_rep += 10;
 !}
 
-Raised support for SPD.
+Raised support for the Republicans.
 
-@spd_supportlower
+@republican_supportlower
 go-to: editpartysupport
 on-arrival: {!
-Q.workers_spd -= 10;
-Q.old_middle_spd -= 10;
-Q.new_middle_spd -= 10;
-Q.rural_spd -= 10;
-Q.unemployed_spd -= 10;
-Q.catholics_spd -= 10;
+Q.workers_rep -= 10;
+Q.middle_class_rep -= 10;
+Q.immigrant_laborers_rep -= 10;
+Q.rural_rep -= 10;
+Q.unemployed_rep -= 10;
+Q.freemen_rep -= 10;
 !}
 
-Lowered support for SPD.
+Lowered support for the Republicans.
 
-@sapd_supportraise
-view-if: sapd_formed == 1
+@democrat_supportraise
 go-to: editpartysupport
 on-arrival: {!
-Q.workers_sapd += 10;
-Q.old_middle_sapd += 10;
-Q.new_middle_sapd += 10;
-Q.rural_sapd += 10;
-Q.unemployed_sapd += 10;
-Q.catholics_sapd += 10;
+Q.workers_dem += 10;
+Q.middle_class_dem += 10;
+Q.immigrant_laborers_dem += 10;
+Q.rural_dem += 10;
+Q.unemployed_dem += 10;
+Q.freemen_dem += 10;
 !}
 
-Raised support for SAPD.
+Raised support for the Democrats.
 
-@sapd_supportlower
-view-if: sapd_formed == 1
+@democrat_supportlower
 go-to: editpartysupport
 on-arrival: {!
-Q.workers_sapd -= 10;
-Q.old_middle_sapd -= 10;
-Q.new_middle_sapd -= 10;
-Q.rural_sapd -= 10;
-Q.unemployed_sapd -= 10;
-Q.catholics_sapd -= 10;
+Q.workers_dem -= 10;
+Q.middle_class_dem -= 10;
+Q.immigrant_laborers_dem -= 10;
+Q.rural_dem -= 10;
+Q.unemployed_dem -= 10;
+Q.freemen_dem -= 10;
 !}
 
-Lowered support for SAPD.
+Lowered support for the Democrats.
 
-@center_supportraise
+@librep_supportraise
+view-if: lib_formed == 1
 go-to: editpartysupport
 on-arrival: {!
-Q.workers_z += 10;
-Q.old_middle_z += 10;
-Q.new_middle_z += 10;
-Q.rural_z += 10;
-Q.unemployed_z += 10;
-Q.catholics_z += 10;
+Q.workers_lib += 10;
+Q.omiddle_class_lib += 10;
+Q.immigrant_laborers_lib += 10;
+Q.rural_lib += 10;
+Q.unemployed_lib += 10;
+Q.freemen_lib += 10;
 !}
 
-Raised support for Center.
+Raised support for Liberal Republicans.
 
-@center_supportlower
+@librep_supportlower
+view-if: lib_formed == 1
 go-to: editpartysupport
 on-arrival: {!
-Q.workers_z -= 10;
-Q.old_middle_z -= 10;
-Q.new_middle_z -= 10;
-Q.rural_z -= 10;
-Q.unemployed_z -= 10;
-Q.catholics_z -= 10;
+Q.workers_lib -= 10;
+Q.middle_class_lib -= 10;
+Q.immigrant_laborers_lib -= 10;
+Q.rural_lib -= 10;
+Q.unemployed_lib -= 10;
+Q.freemen_lib -= 10;
 !}
 
-Lowered support for Center.
+Lowered support for Liberal Republicans.
