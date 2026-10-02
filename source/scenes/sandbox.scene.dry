@@ -966,7 +966,7 @@ Lowered support for Other.
 - @returnpartysupport: Return To Party Support Menu
 
 @republican_worker_up
-go-to: rep_support
+go-to: republican_support
 on-arrival: {!
 Q.workers_rep += 20;
 !}
