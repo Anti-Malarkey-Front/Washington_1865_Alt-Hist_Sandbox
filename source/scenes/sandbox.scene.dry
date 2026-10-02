@@ -822,11 +822,95 @@ Lowered support for Reconstruction
 @editpartysupport
 
 - @editsupport: Detailed Support Editor
-- @spd_supportraise: Raise Republican Support
-- @spd_supportlower: Lower Republican Support
-- @sapd_supportraise: Raise Democrat Support
-- @sapd_supportlower: Lower Democrat Support
-- @center_supportraise: Raise Liberal Republican Support
-- @center_supportlower: Lower Liberal Republican Support
+- @republican_supportraise: Raise Republican Support
+- @republican_supportlower: Lower Republican Support
+- @democrat_supportraise: Raise Democrat Support
+- @democrat_supportlower: Lower Democrat Support
+- @librep_supportraise: Raise Liberal Republican Support
+- @librep_supportlower: Lower Liberal Republican Support
 - @other_supportraise: Raise Other Support
 - @other_supportlower: Lower Other Support
+- @returnsandbox: Return To Sandbox Menu
+
+@returnpartysupport
+go-to: editsupport
+
+@republican_supportraise
+go-to: editpartysupport
+on-arrival: {!
+Q.workers_rep += 10;
+Q.middle_class_rep += 10;
+Q.immigrant_laborers_spd += 10;
+Q.rural_spd += 10;
+Q.unemployed_spd += 10;
+Q.catholics_spd += 10;
+!}
+
+Raised support for SPD.
+
+@spd_supportlower
+go-to: editpartysupport
+on-arrival: {!
+Q.workers_spd -= 10;
+Q.old_middle_spd -= 10;
+Q.new_middle_spd -= 10;
+Q.rural_spd -= 10;
+Q.unemployed_spd -= 10;
+Q.catholics_spd -= 10;
+!}
+
+Lowered support for SPD.
+
+@sapd_supportraise
+view-if: sapd_formed == 1
+go-to: editpartysupport
+on-arrival: {!
+Q.workers_sapd += 10;
+Q.old_middle_sapd += 10;
+Q.new_middle_sapd += 10;
+Q.rural_sapd += 10;
+Q.unemployed_sapd += 10;
+Q.catholics_sapd += 10;
+!}
+
+Raised support for SAPD.
+
+@sapd_supportlower
+view-if: sapd_formed == 1
+go-to: editpartysupport
+on-arrival: {!
+Q.workers_sapd -= 10;
+Q.old_middle_sapd -= 10;
+Q.new_middle_sapd -= 10;
+Q.rural_sapd -= 10;
+Q.unemployed_sapd -= 10;
+Q.catholics_sapd -= 10;
+!}
+
+Lowered support for SAPD.
+
+@center_supportraise
+go-to: editpartysupport
+on-arrival: {!
+Q.workers_z += 10;
+Q.old_middle_z += 10;
+Q.new_middle_z += 10;
+Q.rural_z += 10;
+Q.unemployed_z += 10;
+Q.catholics_z += 10;
+!}
+
+Raised support for Center.
+
+@center_supportlower
+go-to: editpartysupport
+on-arrival: {!
+Q.workers_z -= 10;
+Q.old_middle_z -= 10;
+Q.new_middle_z -= 10;
+Q.rural_z -= 10;
+Q.unemployed_z -= 10;
+Q.catholics_z -= 10;
+!}
+
+Lowered support for Center.
