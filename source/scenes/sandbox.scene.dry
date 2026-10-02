@@ -11,6 +11,7 @@ go-to: sandbox_menu
 - @clear_hand: Clear Cards
 - @make_adv_available: Make Advisors Available
 - @editresources: Edit Resources
+- @editpartysupport: Edit Party Support
 - @editbudget: Edit Budget
 - @editeconomy: Edit Economy
 - @editrelations: Edit Party Relations
