@@ -818,3 +818,15 @@ Q.reconstruction_support -= 25;
 !}
 
 Lowered support for Reconstruction
+
+@editpartysupport
+
+- @editsupport: Detailed Support Editor
+- @spd_supportraise: Raise Republican Support
+- @spd_supportlower: Lower Republican Support
+- @sapd_supportraise: Raise Democrat Support
+- @sapd_supportlower: Lower Democrat Support
+- @center_supportraise: Raise Liberal Republican Support
+- @center_supportlower: Lower Liberal Republican Support
+- @other_supportraise: Raise Other Support
+- @other_supportlower: Lower Other Support
