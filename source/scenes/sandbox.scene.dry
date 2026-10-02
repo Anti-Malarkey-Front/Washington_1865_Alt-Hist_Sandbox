@@ -914,3 +914,486 @@ Q.freemen_lib -= 10;
 !}
 
 Lowered support for Liberal Republicans.
+
+@other_supportraise
+go-to: editpartysupport
+on-arrival: {!
+Q.workers_other += 10;
+Q.old_middle_other += 10;
+Q.new_middle_other += 10;
+Q.rural_other += 10;
+Q.unemployed_other += 10;
+Q.catholics_other += 10;
+!}
+
+Raised support for Other.
+
+@other_supportlower
+go-to: editpartysupport
+on-arrival: {!
+Q.workers_other -= 10;
+Q.old_middle_other -= 10;
+Q.new_middle_other -= 10;
+Q.rural_other -= 10;
+Q.unemployed_other -= 10;
+Q.catholics_other -= 10;
+!}
+
+Lowered support for Other.
+
+@editsupport
+
+- @spd_support: Edit SPD Support
+- @sapd_support: Edit SAPD Support
+- @center_support: Edit Center Support
+- @other_support: Edit Other Support
+- @returnsandbox: Return To Sandbox Menu
+
+@spd_support
+
+- @spd_worker_up: Increase SPD Worker Support
+- @spd_worker_down: Decrease SPD Worker Support
+- @spd_old_middle_up: Increase SPD Old Middle Support
+- @spd_old_middle_down: Decrease SPD Old Middle Support
+- @spd_new_middle_up: Increase SPD New Middle Support
+- @spd_new_middle_down: Decrease SPD New Middle Support
+- @spd_rural_up: Increase SPD Rural Support
+- @spd_rural_down: Decrease SPD Rural Support
+- @spd_unemployed_up: Increase SPD Unemployed Support
+- @spd_unemployed_down: Decrease SPD Unemployed Support
+- @spd_catholics_up: Increase SPD Catholics Support
+- @spd_catholics_down: Decrease SPD Catholics Support
+- @returnpartysupport: Return To Party Support Menu
+
+@spd_worker_up
+go-to: spd_support
+on-arrival: {!
+Q.workers_spd += 20;
+!}
+
+Raised worker support for SPD.
+
+@spd_worker_down
+go-to: spd_support
+on-arrival: {!
+Q.workers_spd -= 20;
+!}
+
+Lowered worker support for SPD.
+
+@spd_old_middle_up
+go-to: spd_support
+on-arrival: {!
+Q.old_middle_spd += 20;
+!}
+
+Raised Old Middle Class support for SPD.
+
+@spd_old_middle_down
+go-to: spd_support
+on-arrival: {!
+Q.old_middle_spd -= 20;
+!}
+
+Lowered Old Middle Class support for SPD.
+
+@spd_new_middle_up
+go-to: spd_support
+on-arrival: {!
+Q.new_middle_spd += 20;
+!}
+
+Raised New Middle Class support for SPD.
+
+@spd_new_middle_down
+go-to: spd_support
+on-arrival: {!
+Q.new_middle_spd -= 20;
+!}
+
+Lowered New Middle Class support for SPD.
+
+@spd_rural_up
+go-to: spd_support
+on-arrival: {!
+Q.rural_spd += 20;
+!}
+
+Raised Rural support for SPD.
+
+@spd_rural_down
+go-to: spd_support
+on-arrival: {!
+Q.rural_spd -= 20;
+!}
+
+Lowered Rural support for SPD.
+
+@spd_unemployed_up
+go-to: spd_support
+on-arrival: {!
+Q.unemployed_spd += 20;
+!}
+
+Raised Unemployed support for SPD.
+
+@spd_unemployed_down
+go-to: spd_support
+on-arrival: {!
+Q.unemployed_spd -= 20;
+!}
+
+Lowered Unemployed support for SPD.
+
+@spd_catholics_up
+go-to: spd_support
+on-arrival: {!
+Q.catholics_spd += 20;
+!}
+
+Raised Catholics support for SPD.
+
+@spd_catholics_down
+go-to: spd_support
+on-arrival: {!
+Q.catholics_spd -= 20;
+!}
+
+Lowered Catholics support for SPD.
+
+@sapd_support
+view-if: sapd_formed == 1
+
+- @sapd_worker_up: Increase SAPD Worker Support
+- @sapd_worker_down: Decrease SAPD Worker Support
+- @sapd_old_middle_up: Increase SAPD Old Middle Support
+- @sapd_old_middle_down: Decrease SAPD Old Middle Support
+- @sapd_new_middle_up: Increase SAPD New Middle Support
+- @sapd_new_middle_down: Decrease SAPD New Middle Support
+- @sapd_rural_up: Increase SAPD Rural Support
+- @sapd_rural_down: Decrease SAPD Rural Support
+- @sapd_unemployed_up: Increase SAPD Unemployed Support
+- @sapd_unemployed_down: Decrease SAPD Unemployed Support
+- @sapd_catholics_up: Increase SAPD Catholics Support
+- @sapd_catholics_down: Decrease SAPD Catholics Support
+- @returnpartysupport: Return To Party Support Menu
+
+@sapd_worker_up
+go-to: sapd_support
+on-arrival: {!
+Q.workers_sapd += 20;
+!}
+
+Raised worker support for SAPD.
+
+@sapd_worker_down
+go-to: sapd_support
+on-arrival: {!
+Q.workers_sapd -= 20;
+!}
+
+Lowered worker support for SAPD.
+
+@sapd_old_middle_up
+go-to: sapd_support
+on-arrival: {!
+Q.old_middle_sapd += 20;
+!}
+
+Raised Old Middle Class support for SAPD.
+
+@sapd_old_middle_down
+go-to: sapd_support
+on-arrival: {!
+Q.old_middle_sapd -= 20;
+!}
+
+Lowered Old Middle Class support for SAPD.
+
+@sapd_new_middle_up
+go-to: sapd_support
+on-arrival: {!
+Q.new_middle_sapd += 20;
+!}
+
+Raised New Middle Class support for SAPD.
+
+@sapd_new_middle_down
+go-to: sapd_support
+on-arrival: {!
+Q.new_middle_sapd -= 20;
+!}
+
+Lowered New Middle Class support for SAPD.
+
+@sapd_rural_up
+go-to: sapd_support
+on-arrival: {!
+Q.rural_sapd += 20;
+!}
+
+Raised Rural support for SAPD.
+
+@sapd_rural_down
+go-to: sapd_support
+on-arrival: {!
+Q.rural_sapd -= 20;
+!}
+
+Lowered Rural support for SAPD.
+
+@sapd_unemployed_up
+go-to: sapd_support
+on-arrival: {!
+Q.unemployed_sapd += 20;
+!}
+
+Raised Unemployed support for SAPD.
+
+@sapd_unemployed_down
+go-to: sapd_support
+on-arrival: {!
+Q.unemployed_sapd -= 20;
+!}
+
+Lowered Unemployed support for SAPD.
+
+@sapd_catholics_up
+go-to: sapd_support
+on-arrival: {!
+Q.catholics_sapd += 20;
+!}
+
+Raised Catholics support for SAPD.
+
+@sapd_catholics_down
+go-to: sapd_support
+on-arrival: {!
+Q.catholics_sapd -= 20;
+!}
+
+Lowered Catholics support for SAPD.
+
+@center_support
+
+- @center_worker_up: Increase Center Worker Support
+- @center_worker_down: Decrease Center Worker Support
+- @center_old_middle_up: Increase Center Old Middle Support
+- @center_old_middle_down: Decrease Center Old Middle Support
+- @center_new_middle_up: Increase Center New Middle Support
+- @center_new_middle_down: Decrease Center New Middle Support
+- @center_rural_up: Increase Center Rural Support
+- @center_rural_down: Decrease Center Rural Support
+- @center_unemployed_up: Increase Center Unemployed Support
+- @center_unemployed_down: Decrease Center Unemployed Support
+- @center_catholics_up: Increase Center Catholics Support
+- @center_catholics_down: Decrease Center Catholics Support
+- @returnpartysupport: Return To Party Support Menu
+
+@center_worker_up
+go-to: center_support
+on-arrival: {!
+Q.workers_z += 20;
+!}
+
+Raised worker support for Center.
+
+@center_worker_down
+go-to: center_support
+on-arrival: {!
+Q.workers_z -= 20;
+!}
+
+Lowered worker support for Center.
+
+@center_old_middle_up
+go-to: center_support
+on-arrival: {!
+Q.old_middle_z += 20;
+!}
+
+Raised Old Middle Class support for Center.
+
+@center_old_middle_down
+go-to: center_support
+on-arrival: {!
+Q.old_middle_z -= 20;
+!}
+
+Lowered Old Middle Class support for Center.
+
+@center_new_middle_up
+go-to: center_support
+on-arrival: {!
+Q.new_middle_z += 20;
+!}
+
+Raised New Middle Class support for Center.
+
+@center_new_middle_down
+go-to: center_support
+on-arrival: {!
+Q.new_middle_z -= 20;
+!}
+
+Lowered New Middle Class support for Center.
+
+@center_rural_up
+go-to: center_support
+on-arrival: {!
+Q.rural_z += 20;
+!}
+
+Raised Rural support for Center.
+
+@center_rural_down
+go-to: center_support
+on-arrival: {!
+Q.rural_z -= 20;
+!}
+
+Lowered Rural support for Center.
+
+@center_unemployed_up
+go-to: center_support
+on-arrival: {!
+Q.unemployed_z += 20;
+!}
+
+Raised Unemployed support for Center.
+
+@center_unemployed_down
+go-to: center_support
+on-arrival: {!
+Q.unemployed_z -= 20;
+!}
+
+Lowered Unemployed support for Center.
+
+@center_catholics_up
+go-to: center_support
+on-arrival: {!
+Q.catholics_z += 20;
+!}
+
+Raised Catholics support for Center.
+
+@center_catholics_down
+go-to: center_support
+on-arrival: {!
+Q.catholics_z -= 20;
+!}
+
+Lowered Catholics support for Center.
+
+@other_support
+
+- @other_worker_up: Increase Other Worker Support
+- @other_worker_down: Decrease Other Worker Support
+- @other_old_middle_up: Increase Other Old Middle Support
+- @other_old_middle_down: Decrease Other Old Middle Support
+- @other_new_middle_up: Increase Other New Middle Support
+- @other_new_middle_down: Decrease Other New Middle Support
+- @other_rural_up: Increase Other Rural Support
+- @other_rural_down: Decrease Other Rural Support
+- @other_unemployed_up: Increase Other Unemployed Support
+- @other_unemployed_down: Decrease Other Unemployed Support
+- @other_catholics_up: Increase Other Catholics Support
+- @other_catholics_down: Decrease Other Catholics Support
+- @returnpartysupport: Return To Party Support Menu
+
+@other_worker_up
+go-to: other_support
+on-arrival: {!
+Q.workers_other += 20;
+!}
+
+Raised worker support for Other.
+
+@other_worker_down
+go-to: other_support
+on-arrival: {!
+Q.workers_other -= 20;
+!}
+
+Lowered worker support for Other.
+
+@other_old_middle_up
+go-to: other_support
+on-arrival: {!
+Q.old_middle_other += 20;
+!}
+
+Raised Old Middle Class support for Other.
+
+@other_old_middle_down
+go-to: other_support
+on-arrival: {!
+Q.old_middle_other -= 20;
+!}
+
+Lowered Old Middle Class support for Other.
+
+@other_new_middle_up
+go-to: other_support
+on-arrival: {!
+Q.new_middle_other += 20;
+!}
+
+Raised New Middle Class support for Other.
+
+@other_new_middle_down
+go-to: other_support
+on-arrival: {!
+Q.new_middle_other -= 20;
+!}
+
+Lowered New Middle Class support for Other.
+
+@other_rural_up
+go-to: other_support
+on-arrival: {!
+Q.rural_other += 20;
+!}
+
+Raised Rural support for Other.
+
+@other_rural_down
+go-to: other_support
+on-arrival: {!
+Q.rural_other -= 20;
+!}
+
+Lowered Rural support for Other.
+
+@other_unemployed_up
+go-to: other_support
+on-arrival: {!
+Q.unemployed_other += 20;
+!}
+
+Raised Unemployed support for Other.
+
+@other_unemployed_down
+go-to: other_support
+on-arrival: {!
+Q.unemployed_other -= 20;
+!}
+
+Lowered Unemployed support for Other.
+
+@other_catholics_up
+go-to: other_support
+on-arrival: {!
+Q.catholics_other += 20;
+!}
+
+Raised Catholics support for Other.
+
+@other_catholics_down
+go-to: other_support
+on-arrival: {!
+Q.catholics_other -= 20;
+!}
+
+Lowered Catholics support for Other.
